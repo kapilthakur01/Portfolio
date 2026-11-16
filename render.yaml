@@ -18,8 +18,9 @@ services:
   - type: web
     name: kapil-portfolio
     runtime: static
+    rootDir: .
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
         value: https://kapil-portfolio-api.onrender.com/api

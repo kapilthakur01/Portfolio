@@ -15,7 +15,6 @@
       "linkedin": "https://www.linkedin.com/in/kapilthakur1/"
     }
   },
-
   "socials": [
     {
       "_id": "social_github",
@@ -42,13 +41,11 @@
       "icon": "Code2"
     }
   ],
-
   "gui": {
     "wallpaper": "gradient",
     "welcomeText": "Welcome. Feel free to open apps, check out my recent projects, or run commands from the dock and desktop widgets.",
     "menuBarName": "Kapil Thakur"
   },
-
   "widgets": {
     "weather": {
       "location": "Parwanoo",
@@ -57,11 +54,31 @@
       "high": "22°",
       "low": "11°",
       "hourly": [
-        { "time": "10 AM", "temp": "18°", "icon": "CloudSun" },
-        { "time": "11 AM", "temp": "19°", "icon": "Sun" },
-        { "time": "12 PM", "temp": "21°", "icon": "Sun" },
-        { "time": "1 PM",  "temp": "22°", "icon": "CloudSun" },
-        { "time": "2 PM",  "temp": "20°", "icon": "CloudRain" }
+        {
+          "time": "10 AM",
+          "temp": "18°",
+          "icon": "CloudSun"
+        },
+        {
+          "time": "11 AM",
+          "temp": "19°",
+          "icon": "Sun"
+        },
+        {
+          "time": "12 PM",
+          "temp": "21°",
+          "icon": "Sun"
+        },
+        {
+          "time": "1 PM",
+          "temp": "22°",
+          "icon": "CloudSun"
+        },
+        {
+          "time": "2 PM",
+          "temp": "20°",
+          "icon": "CloudRain"
+        }
       ]
     },
     "dsaFocus": {
@@ -79,40 +96,71 @@
       "appTarget": "contact"
     }
   },
-
   "skills": [
     {
       "_id": "skill_001",
       "category": "Languages",
-      "items": ["C", "C++", "Java", "Python", "JavaScript (ES6+)"]
+      "items": [
+        "C",
+        "C++",
+        "Java",
+        "Python",
+        "JavaScript (ES6+)"
+      ]
     },
     {
       "_id": "skill_002",
       "category": "Frontend",
-      "items": ["React.js", "HTML5", "CSS3", "DOM Manipulation", "Responsive Web Design"]
+      "items": [
+        "React.js",
+        "HTML5",
+        "CSS3",
+        "DOM Manipulation",
+        "Responsive Web Design"
+      ]
     },
     {
       "_id": "skill_003",
       "category": "Backend",
-      "items": ["Node.js", "Express.js", "REST API Design & Integration"]
+      "items": [
+        "Node.js",
+        "Express.js",
+        "REST API Design & Integration"
+      ]
     },
     {
       "_id": "skill_004",
       "category": "Databases",
-      "items": ["MongoDB", "Basic SQL"]
+      "items": [
+        "MongoDB",
+        "Basic SQL"
+      ]
     },
     {
       "_id": "skill_005",
       "category": "CS Fundamentals",
-      "items": ["Data Structures & Algorithms", "Object-Oriented Programming", "Operating Systems", "Computer Networks", "DBMS"]
+      "items": [
+        "Data Structures & Algorithms",
+        "Object-Oriented Programming",
+        "Operating Systems",
+        "Computer Networks",
+        "DBMS"
+      ]
     },
     {
       "_id": "skill_006",
       "category": "Tools & Platforms",
-      "items": ["Git", "GitHub", "Linux (Basic)", "Postman", "Domain & Hosting", "Docker", "Kubernetes (Basic)"]
+      "items": [
+        "Git",
+        "GitHub",
+        "Linux (Basic)",
+        "Postman",
+        "Domain & Hosting",
+        "Docker",
+        "Kubernetes (Basic)"
+      ]
     }
   ],
-
   "projects": [
     {
       "_id": "proj_001",
@@ -121,7 +169,16 @@
       "subtitle": "Real-Time Peer-to-Peer Ride-Sharing System",
       "team": "Team of 4",
       "role": "Lead Contributor",
-      "stack": ["JavaScript", "Node.js", "Express.js", "MongoDB", "Socket.IO", "OSRM", "H3", "Turf.js"],
+      "stack": [
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Socket.IO",
+        "OSRM",
+        "H3",
+        "Turf.js"
+      ],
       "highlights": [
         "MERN-based ride-sharing platform with JWT authentication and live ride tracking.",
         "Built full-stack platform with authentication and live ride tracking.",
@@ -137,7 +194,13 @@
       "subtitle": "Mutual Mentoring Learning Platform",
       "team": "Team of 4",
       "role": "Lead Contributor",
-      "stack": ["Node.js", "Express.js", "MongoDB", "JavaScript", "Jitsi Meet API"],
+      "stack": [
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "JavaScript",
+        "Jitsi Meet API"
+      ],
       "highlights": [
         "Full-stack skill exchange platform with authentication and skill matching.",
         "Built a full-stack skill exchange platform with authentication and skill matching.",
@@ -153,7 +216,16 @@
       "subtitle": "Blockchain-Based Secure Examination Platform",
       "team": "Team of 4",
       "role": "Lead Contributor",
-      "stack": ["React.js", "Node.js", "Express.js", "MongoDB", "Solidity", "Hardhat", "AES Encryption", "JWT"],
+      "stack": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Solidity",
+        "Hardhat",
+        "AES Encryption",
+        "JWT"
+      ],
       "highlights": [
         "Developed a blockchain-based secure examination platform with encrypted and time-locked exam papers.",
         "Implemented blockchain notarization using Solidity and Hardhat, with AES encryption and SHA-256 integrity verification.",
@@ -163,9 +235,7 @@
       "live": null
     }
   ],
-
   "experience": [],
-
   "education": [
     {
       "_id": "edu_001",
@@ -176,7 +246,6 @@
       "cgpa": "9.0+ / 10"
     }
   ],
-
   "achievements": [
     {
       "_id": "ach_001",
@@ -190,7 +259,7 @@
       "title": "AI & Emerging Technologies",
       "badge": "99 / 100",
       "tag": "Academic Excellence",
-      "detail": "Scored 99 /100 in the AI Masterclass examination on ChatGPT, DeepSeek, and Metaverse conducted at Chitkara University."
+      "detail": "Scored 99/100 in the AI Masterclass examination on ChatGPT, DeepSeek, and Metaverse conducted at Chitkara University."
     },
     {
       "_id": "ach_003",
@@ -200,7 +269,6 @@
       "detail": "Competed among 100+ teams at Chitkara University, collaborating under time constraints to build a functional prototype."
     }
   ],
-
   "contact": {
     "_id": "contact_001",
     "email": "thakurkapil2007@gmail.com",

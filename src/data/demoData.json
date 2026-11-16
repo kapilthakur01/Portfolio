@@ -66,7 +66,7 @@
     },
     "dsaFocus": {
       "badge": "DSA FOCUS",
-      "stat": "600+",
+      "stat": "500+",
       "label": "LeetCode Solved",
       "sub": "Arrays · Trees · Graphs",
       "url": "https://leetcode.com/u/EJtucT1f8w/"
@@ -181,16 +181,16 @@
     {
       "_id": "ach_001",
       "title": "LeetCode Problem Solving",
-      "badge": "600+ Solved",
+      "badge": "500+ Solved",
       "tag": "DSA & Algorithms",
-      "detail": "Solved 600+ problems on LeetCode across data structures and algorithms, strengthening core problem-solving and coding efficiency."
+      "detail": "Solved 500+ problems on LeetCode across data structures and algorithms, strengthening core problem-solving and coding efficiency."
     },
     {
       "_id": "ach_002",
       "title": "AI & Emerging Technologies",
-      "badge": "100 / 100",
+      "badge": "99 / 100",
       "tag": "Academic Excellence",
-      "detail": "Scored 100/100 in the AI Masterclass examination on ChatGPT, DeepSeek, and Metaverse conducted at Chitkara University."
+      "detail": "Scored 99 /100 in the AI Masterclass examination on ChatGPT, DeepSeek, and Metaverse conducted at Chitkara University."
     },
     {
       "_id": "ach_003",

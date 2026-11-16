@@ -17,7 +17,7 @@ export default function Resume() {
       <div className={resumeStyles.toolbar}>
         <div className={resumeStyles.titleInfo}>
           <span className={resumeStyles.label}>Resume — {profile.name}</span>
-          <span className={resumeStyles.subLabel}>Software Engineer · B.E. CSE</span>
+          <span className={resumeStyles.subLabel}>MERN Stack Developer · B.E. CSE</span>
         </div>
 
         <div className={resumeStyles.actions}>
@@ -36,7 +36,7 @@ export default function Resume() {
           {/* Download PDF file directly */}
           <a
             href={pdfSrc}
-            download="Krish_Thakur_Resume.pdf"
+            download="Kapil_Thakur_Resume.pdf"
             className={`${styles.link} ${resumeStyles.downloadBtn}`}
             aria-label="Download resume PDF"
           >

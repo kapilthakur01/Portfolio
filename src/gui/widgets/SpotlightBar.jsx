@@ -30,10 +30,10 @@ import styles from '../../styles/gui/Widgets.module.css';
 const CATEGORIES = ['all', 'apps', 'projects', 'skills', 'experience', 'commands'];
 
 const APPS_LIST = [
-  { id: 'about',      title: 'About Krish',            category: 'Apps', desc: 'Background, education, and technical profile',   icon: User },
-  { id: 'projects',   title: 'Projects',               category: 'Apps', desc: 'Quick Pull, SkillXchange, MeshGuard',            icon: FolderGit2 },
+  { id: 'about',      title: 'About Kapil',            category: 'Apps', desc: 'Background, education, and technical profile',   icon: User },
+  { id: 'projects',   title: 'Projects',               category: 'Apps', desc: 'Quick Pull, SkillXchange, PerfectXams',            icon: FolderGit2 },
   { id: 'skills',     title: 'Technical Skills',       category: 'Apps', desc: 'Languages, frontend, backend, tools, databases', icon: Sliders },
-  { id: 'experience', title: 'Experience & Education', category: 'Apps', desc: 'Chitkara University (CGPA 9.94) & Achievements', icon: GraduationCap },
+  { id: 'experience', title: 'Experience & Education', category: 'Apps', desc: 'Chitkara University (CGPA 9.0+) & Achievements', icon: GraduationCap },
   { id: 'resume',     title: 'Resume Viewer',          category: 'Apps', desc: 'View and download vector resume PDF',            icon: FileText },
   { id: 'terminal',   title: 'Terminal Emulator',      category: 'Apps', desc: 'Integrated interactive UNIX shell',              icon: Terminal },
   { id: 'contact',    title: 'Contact',                category: 'Apps', desc: 'Direct email, GitHub, LinkedIn connections',     icon: Mail },
@@ -41,7 +41,7 @@ const APPS_LIST = [
 
 const TERMINAL_COMMANDS = [
   { cmd: 'help',     desc: 'List all available shell commands' },
-  { cmd: 'about',    desc: 'Display Krish’s background and bio' },
+  { cmd: 'about',    desc: 'Display Kapil’s background and bio' },
   { cmd: 'skills',   desc: 'Print technical skills matrix' },
   { cmd: 'projects', desc: 'List featured software projects' },
   { cmd: 'contact',  desc: 'Show contact details and email' },
@@ -216,7 +216,7 @@ export default function SpotlightBar({ switchMode }) {
       APPS_LIST.find((a) => a.id === 'contact'),
       {
         id: 'sug-leetcode',
-        url: 'https://leetcode.com/krishthakur248',
+        url: 'https://leetcode.com/u/EJtucT1f8w/',
         title: `LeetCode (${leetCodeCount} Solved)`,
         category: 'Links',
         desc: 'Visit competitive programming profile',

@@ -1,0 +1,147 @@
+/**
+ * updatePortfolio.js
+ * Run once to push Kapil Thakur's real data to MongoDB Atlas.
+ * Usage: node updatePortfolio.js
+ */
+import 'dotenv/config';
+import mongoose from 'mongoose';
+import { PortfolioData } from './models.js';
+
+await mongoose.connect(process.env.MONGODB_URI);
+console.log('✅ Connected to MongoDB');
+
+const kapilData = {
+  profile: {
+    _id: 'kapil_001',
+    name: 'Kapil Thakur',
+    role: 'MERN Stack Developer',
+    tagline: 'Full-stack CS Engineering student skilled in the MERN stack, DSA (C++/Java), OOP, and core CS fundamentals, with hands-on experience to build full-stack and ML-integrated projects.',
+    bio: 'Computer Science Engineering student at Chitkara University (CGPA 9.0+). I build full-stack web platforms and Android apps, with a focus on real-time networking and data structures.',
+    phone: '+91 7831970301',
+    email: 'thakurkapil2007@gmail.com',
+    location: 'Parwanoo, Himachal Pradesh, India',
+    photo: '/img/Me.jpeg',
+    resume_pdf: '/img/Resume.pdf',
+    links: {
+      github: 'https://github.com/kapilthakur01',
+      linkedin: 'https://www.linkedin.com/in/kapilthakur1/',
+    },
+  },
+  socials: [
+    { _id: 'social_github',   label: 'GitHub',   url: 'https://github.com/kapilthakur01',                                      icon: 'Github'   },
+    { _id: 'social_linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/kapilthakur1/',                              icon: 'Linkedin' },
+    { _id: 'social_email',    label: 'Gmail',    url: 'https://mail.google.com/mail/?view=cm&fs=1&to=thakurkapil2007@gmail.com', icon: 'Mail'     },
+    { _id: 'social_leetcode', label: 'LeetCode', url: 'https://leetcode.com/u/EJtucT1f8w/',                                     icon: 'Code2'    },
+  ],
+  gui: {
+    wallpaper: 'gradient',
+    welcomeText: 'Welcome. Feel free to open apps, check out my recent projects, or run commands from the dock and desktop widgets.',
+    menuBarName: 'Kapil Thakur',
+  },
+  widgets: {
+    weather: {
+      location: 'Parwanoo',
+      temperature: '18°', condition: 'Partly Cloudy', high: '22°', low: '11°',
+      hourly: [
+        { time: '10 AM', temp: '18°', icon: 'CloudSun' },
+        { time: '11 AM', temp: '19°', icon: 'Sun'      },
+        { time: '12 PM', temp: '21°', icon: 'Sun'      },
+        { time: '1 PM',  temp: '22°', icon: 'CloudSun' },
+        { time: '2 PM',  temp: '20°', icon: 'CloudRain'},
+      ],
+    },
+    dsaFocus: {
+      badge: 'DSA FOCUS', stat: '600+', label: 'LeetCode Solved',
+      sub: 'Arrays · Trees · Graphs', url: 'https://leetcode.com/u/EJtucT1f8w/',
+    },
+    status: {
+      badge: 'STATUS', headline: 'Open to Roles',
+      label: 'Full-stack / MERN', sub: 'Chitkara · CGPA 9.0+', appTarget: 'contact',
+    },
+  },
+  skills: [
+    { _id: 'skill_001', category: 'Languages',        items: ['C', 'C++', 'Java', 'Python', 'JavaScript (ES6+)'] },
+    { _id: 'skill_002', category: 'Frontend',         items: ['React.js', 'HTML5', 'CSS3', 'DOM Manipulation', 'Responsive Web Design'] },
+    { _id: 'skill_003', category: 'Backend',          items: ['Node.js', 'Express.js', 'REST API Design & Integration'] },
+    { _id: 'skill_004', category: 'Databases',        items: ['MongoDB', 'Basic SQL'] },
+    { _id: 'skill_005', category: 'CS Fundamentals',  items: ['Data Structures & Algorithms', 'Object-Oriented Programming', 'Operating Systems', 'Computer Networks', 'DBMS'] },
+    { _id: 'skill_006', category: 'Tools & Platforms',items: ['Git', 'GitHub', 'Linux (Basic)', 'Postman', 'Domain & Hosting', 'Docker', 'Kubernetes (Basic)'] },
+  ],
+  projects: [
+    {
+      _id: 'proj_001', slug: 'quick-pull', name: 'Quick Pull',
+      subtitle: 'Real-Time Peer-to-Peer Ride-Sharing System',
+      team: 'Team of 4', role: 'Lead Contributor',
+      stack: ['JavaScript', 'Node.js', 'Express.js', 'MongoDB', 'Socket.IO', 'OSRM', 'H3', 'Turf.js'],
+      highlights: [
+        'MERN-based ride-sharing platform with JWT authentication and live ride tracking.',
+        'Built full-stack platform with authentication and live ride tracking.',
+        'Implemented route-aware matching and real-time ride updates using OSRM, H3, Turf.js, and Socket.IO.',
+      ],
+      github: 'https://github.com/kapilthakur01', live: null,
+    },
+    {
+      _id: 'proj_002', slug: 'skillxchange', name: 'SkillXchange',
+      subtitle: 'Mutual Mentoring Learning Platform',
+      team: 'Team of 4', role: 'Lead Contributor',
+      stack: ['Node.js', 'Express.js', 'MongoDB', 'JavaScript', 'Jitsi Meet API'],
+      highlights: [
+        'Full-stack skill exchange platform with authentication and skill matching.',
+        'Built a full-stack skill exchange platform with authentication and skill matching.',
+        'Integrated Jitsi Meet API for mentoring sessions and deployed the app on GitHub Pages and Render.',
+      ],
+      github: 'https://github.com/kapilthakur01', live: null,
+    },
+    {
+      _id: 'proj_003', slug: 'perfectxams', name: 'PerfectXams',
+      subtitle: 'Blockchain-Based Secure Examination Platform',
+      team: 'Team of 4', role: 'Lead Contributor',
+      stack: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Solidity', 'Hardhat', 'AES Encryption', 'JWT'],
+      highlights: [
+        'Developed a blockchain-based secure examination platform with encrypted and time-locked exam papers.',
+        'Implemented blockchain notarization using Solidity and Hardhat, with AES encryption and SHA-256 integrity verification.',
+        'Built JWT-based authentication and responsive dashboards for Exam Authorities and Institution Organizers.',
+      ],
+      github: 'https://github.com/kapilthakur01', live: null,
+    },
+  ],
+  experience: [],
+  education: [
+    {
+      _id: 'edu_001',
+      institution: 'Chitkara University',
+      location: 'Himachal Pradesh, India',
+      degree: 'B.E. in Computer Science Engineering',
+      period: '2024 – 2028 (Expected)',
+      cgpa: '9.0+ / 10',
+    },
+  ],
+  achievements: [
+    {
+      _id: 'ach_001', title: 'LeetCode Problem Solving', badge: '500+ Solved', tag: 'DSA & Algorithms',
+      detail: 'Solved 500+ problems on LeetCode across data structures and algorithms, strengthening core problem-solving and coding efficiency.',
+    },
+    {
+      _id: 'ach_002', title: 'AI & Emerging Technologies', badge: '99 / 100', tag: 'Academic Excellence',
+      detail: 'Scored 99/100 in the AI Masterclass examination on ChatGPT, DeepSeek, and Metaverse conducted at Chitkara University.',
+    },
+    {
+      _id: 'ach_003', title: 'HackIndia Hackathon', badge: '100+ Teams', tag: 'Hackathon Demo',
+      detail: 'Competed among 100+ teams at Chitkara University, collaborating under time constraints to build a functional prototype.',
+    },
+  ],
+  contact: {
+    _id: 'contact_001',
+    email: 'thakurkapil2007@gmail.com',
+    phone: '+91 7831970301',
+    github: 'https://github.com/kapilthakur01',
+    linkedin: 'https://www.linkedin.com/in/kapilthakur1/',
+    location: 'Parwanoo, Himachal Pradesh, India',
+  },
+};
+
+await PortfolioData.findByIdAndUpdate('portfolio_v1', { $set: kapilData }, { upsert: true });
+console.log('✅ Portfolio data updated in MongoDB with Kapil Thakur\'s details!');
+await mongoose.disconnect();
+process.exit(0);
+

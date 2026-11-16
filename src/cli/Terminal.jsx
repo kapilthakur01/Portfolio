@@ -87,7 +87,7 @@ export default function Terminal({ switchMode, embedded = false, isWindowFocused
     inputRef.current?.focus();
   }
 
-  const HOME = '/home/krish';
+  const HOME = '/home/kapil';
   const displayPath = cwd === HOME
     ? '~'
     : cwd.startsWith(HOME + '/') ? '~' + cwd.slice(HOME.length) : cwd;
@@ -200,7 +200,7 @@ export default function Terminal({ switchMode, embedded = false, isWindowFocused
             <span className={`${styles.dot} ${styles.dotGreen}`} />
           </div>
 
-          <span className={styles.chromeTitle}>visitor@krish:{displayPath}</span>
+          <span className={styles.chromeTitle}>visitor@kapil:{displayPath}</span>
 
           <button
             id="toggle-window-mode"
@@ -291,7 +291,7 @@ function Prompt({ path }) {
     <span>
       <span style={{ color: 'var(--prompt-user)', fontWeight: 600 }}>visitor</span>
       <span style={{ color: 'var(--text-muted)' }}>@</span>
-      <span style={{ color: 'var(--prompt-host)', fontWeight: 600 }}>krish</span>
+      <span style={{ color: 'var(--prompt-host)', fontWeight: 600 }}>kapil</span>
       <span style={{ color: 'var(--text-muted)' }}>:</span>
       <span style={{ color: 'var(--prompt-path)' }}>{path}</span>
       <span style={{ color: 'var(--prompt-dollar)', margin: '0 6px 0 3px' }}>$</span>

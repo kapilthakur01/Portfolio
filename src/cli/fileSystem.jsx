@@ -13,27 +13,27 @@ export const FS = {
   },
   '/home': {
     type: 'dir',
-    children: ['krish'],
+    children: ['kapil'],
   },
-  '/home/krish': {
+  '/home/kapil': {
     type: 'dir',
     children: ['about.txt', 'skills.txt', 'contact.txt', 'projects', 'resume.txt'],
   },
-  '/home/krish/about.txt': {
+  '/home/kapil/about.txt': {
     type: 'file',
-    content: `Name    : Krish Thakur
-Role    : Software Engineer
-Email   : krishthakur248@gmail.com
-Phone   : +91 7018067797
-Location: Himachal Pradesh, India
+    content: `Name    : Kapil Thakur
+Role    : MERN Stack Developer
+Email   : thakurkapil2007@gmail.com
+Phone   : +91 7831970301
+Location: Parwanoo, Himachal Pradesh, India
 
 I'm a full-stack CS Engineering student at Chitkara University.
 Strong with MERN, DSA (C++/Java), and building real projects.
-CGPA: 9.94/10
+CGPA: 9.0+/10
 
 Type 'about' for the full interactive version.`,
   },
-  '/home/krish/skills.txt': {
+  '/home/kapil/skills.txt': {
     type: 'file',
     content: `Languages  : C, C++, Java, Python, JavaScript (ES6+)
 Frontend   : React.js, HTML5, CSS3, DOM, Responsive Design
@@ -44,28 +44,28 @@ Tools      : Git, GitHub, Linux, Postman, Docker, Kubernetes
 
 Type 'skills' for the full interactive view.`,
   },
-  '/home/krish/contact.txt': {
+  '/home/kapil/contact.txt': {
     type: 'file',
-    content: `Email   : krishthakur248@gmail.com
-Phone   : +91 7018067797
-GitHub  : https://github.com/krishthakur248
-LinkedIn: https://linkedin.com/in/krish-thakur-/
+    content: `Email   : thakurkapil2007@gmail.com
+Phone   : +91 7831970301
+GitHub  : https://github.com/kapilthakur01
+LinkedIn: https://www.linkedin.com/in/kapilthakur1/
 
 Type 'contact' to see clickable links.`,
   },
-  '/home/krish/resume.txt': {
+  '/home/kapil/resume.txt': {
     type: 'file',
-    content: `KRISH THAKUR — SOFTWARE ENGINEER
+    content: `KAPIL THAKUR — MERN STACK DEVELOPER
 Resume available as PDF.
 
 Run 'resume' to view it here.
 Run 'resume --download' to download the PDF.`,
   },
-  '/home/krish/projects': {
+  '/home/kapil/projects': {
     type: 'dir',
-    children: ['quick-pull.txt', 'skillxchange.txt', 'meshguard.txt'],
+    children: ['quick-pull.txt', 'skillxchange.txt', 'perfectxams.txt'],
   },
-  '/home/krish/projects/quick-pull.txt': {
+  '/home/kapil/projects/quick-pull.txt': {
     type: 'file',
     content: `Quick Pull — Real-Time Peer-to-Peer Ride-Sharing System
 Team : 4 members | Role: Lead Contributor
@@ -76,7 +76,7 @@ Stack: JavaScript, Node.js, Express.js, MongoDB, Socket.IO, OSRM, H3, Turf.js
 
 Run 'project quick-pull' for the full view.`,
   },
-  '/home/krish/projects/skillxchange.txt': {
+  '/home/kapil/projects/skillxchange.txt': {
     type: 'file',
     content: `SkillXchange — Mutual Mentoring Learning Platform
 Team : 4 members | Role: Lead Contributor
@@ -87,21 +87,22 @@ Stack: Node.js, Express.js, MongoDB, JavaScript, Jitsi Meet API
 
 Run 'project skillxchange' for the full view.`,
   },
-  '/home/krish/projects/meshguard.txt': {
+  '/home/kapil/projects/perfectxams.txt': {
     type: 'file',
-    content: `MeshGuard — Offline Disaster Rescue & Survivor Tracking App
-Team : Solo
-Stack: Kotlin, Jetpack Compose, Google Nearby Connections API, Room, osmdroid
+    content: `PerfectXams — Blockchain-Based Secure Examination Platform
+Team : 4 members | Role: Lead Contributor
+Stack: React.js, Node.js, Express.js, MongoDB, Solidity, Hardhat, AES Encryption, JWT
 
-- Offline-first Android app relaying distress packets via gossip mesh.
-- Survivor/Rescuer roles, background broadcast, offline map dashboard.
+- Blockchain-based secure examination platform with encrypted and time-locked exam papers.
+- Blockchain notarization using Solidity and Hardhat, with AES encryption and SHA-256 integrity verification.
+- JWT-based authentication and responsive dashboards for Exam Authorities and Institution Organizers.
 
-Run 'project meshguard' for the full view.`,
+Run 'project perfectxams' for the full view.`,
   },
 };
 
 // Starting directory for the session.
-export const HOME_DIR = '/home/krish';
+export const HOME_DIR = '/home/kapil';
 
 /**
  * Resolves a path relative to cwd. Handles "..", ".", and absolute paths.

@@ -11,7 +11,7 @@ export default function DsaFocusWidget() {
     stat: '600+',
     label: 'LeetCode Solved',
     sub: 'Arrays · Trees · Graphs',
-    url: 'https://leetcode.com/krishthakur248',
+    url: 'https://leetcode.com/u/EJtucT1f8w/',
   };
 
   const count = useLeetCodeCount();

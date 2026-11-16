@@ -1,18 +1,18 @@
 {
   "profile": {
-    "_id": "krish_thakur_001",
-    "name": "Krish Thakur",
-    "role": "Software Engineer",
-    "tagline": "Full-stack developer focused on real-time systems, scalable APIs, and clean interfaces.",
-    "bio": "Computer Science student at Chitkara University (CGPA 9.94). I build full-stack web platforms and Android apps, with a focus on real-time networking and data structures.",
-    "phone": "+91 7018067797",
-    "email": "krishthakur248@gmail.com",
-    "location": "Himachal Pradesh, India",
+    "_id": "kapil_001",
+    "name": "Kapil Thakur",
+    "role": "MERN Stack Developer",
+    "tagline": "Full-stack CS Engineering student skilled in the MERN stack, DSA (C++/Java), OOP, and core CS fundamentals, with hands-on experience to build full-stack and ML-integrated projects.",
+    "bio": "Computer Science Engineering student at Chitkara University (CGPA 9.0+). I build full-stack web platforms and Android apps, with a focus on real-time networking and data structures.",
+    "phone": "+91 7831970301",
+    "email": "thakurkapil2007@gmail.com",
+    "location": "Parwanoo, Himachal Pradesh, India",
     "photo": "/img/Me.jpeg",
     "resume_pdf": "/img/Resume.pdf",
     "links": {
-      "github": "https://github.com/krishthakur248",
-      "linkedin": "https://linkedin.com/in/krish-thakur-/"
+      "github": "https://github.com/kapilthakur01",
+      "linkedin": "https://www.linkedin.com/in/kapilthakur1/"
     }
   },
 
@@ -20,25 +20,25 @@
     {
       "_id": "social_github",
       "label": "GitHub",
-      "url": "https://github.com/krishthakur248",
+      "url": "https://github.com/kapilthakur01",
       "icon": "Github"
     },
     {
       "_id": "social_linkedin",
       "label": "LinkedIn",
-      "url": "https://linkedin.com/in/krish-thakur-/",
+      "url": "https://www.linkedin.com/in/kapilthakur1/",
       "icon": "Linkedin"
     },
     {
       "_id": "social_email",
       "label": "Gmail",
-      "url": "https://mail.google.com/mail/?view=cm&fs=1&to=krishthakur248@gmail.com",
+      "url": "https://mail.google.com/mail/?view=cm&fs=1&to=thakurkapil2007@gmail.com",
       "icon": "Mail"
     },
     {
       "_id": "social_leetcode",
       "label": "LeetCode",
-      "url": "https://leetcode.com/krishthakur248",
+      "url": "https://leetcode.com/u/EJtucT1f8w/",
       "icon": "Code2"
     }
   ],
@@ -46,12 +46,12 @@
   "gui": {
     "wallpaper": "gradient",
     "welcomeText": "Welcome. Feel free to open apps, check out my recent projects, or run commands from the dock and desktop widgets.",
-    "menuBarName": "Krish Thakur"
+    "menuBarName": "Kapil Thakur"
   },
 
   "widgets": {
     "weather": {
-      "location": "Himachal Pradesh",
+      "location": "Parwanoo",
       "temperature": "18°",
       "condition": "Partly Cloudy",
       "high": "22°",
@@ -69,13 +69,13 @@
       "stat": "600+",
       "label": "LeetCode Solved",
       "sub": "Arrays · Trees · Graphs",
-      "url": "https://leetcode.com/krishthakur248"
+      "url": "https://leetcode.com/u/EJtucT1f8w/"
     },
     "status": {
       "badge": "STATUS",
       "headline": "Open to Roles",
-      "label": "Full-stack / Android",
-      "sub": "Chitkara · CGPA 9.94",
+      "label": "Full-stack / MERN",
+      "sub": "Chitkara · CGPA 9.0+",
       "appTarget": "contact"
     }
   },
@@ -124,10 +124,11 @@
       "stack": ["JavaScript", "Node.js", "Express.js", "MongoDB", "Socket.IO", "OSRM", "H3", "Turf.js"],
       "highlights": [
         "MERN-based ride-sharing platform with JWT authentication and live ride tracking.",
-        "Route-aware matching and real-time ride updates via OSRM, H3, and Socket.IO."
+        "Built full-stack platform with authentication and live ride tracking.",
+        "Implemented route-aware matching and real-time ride updates using OSRM, H3, Turf.js, and Socket.IO."
       ],
-      "github": "https://github.com/krishthakur248",
-      "live": "https://krishthakur248.github.io/QuickPull/"
+      "github": "https://github.com/kapilthakur01",
+      "live": null
     },
     {
       "_id": "proj_002",
@@ -139,24 +140,26 @@
       "stack": ["Node.js", "Express.js", "MongoDB", "JavaScript", "Jitsi Meet API"],
       "highlights": [
         "Full-stack skill exchange platform with authentication and skill matching.",
-        "Integrated Jitsi Meet API for mentoring sessions. Deployed on GitHub Pages and Render."
+        "Built a full-stack skill exchange platform with authentication and skill matching.",
+        "Integrated Jitsi Meet API for mentoring sessions and deployed the app on GitHub Pages and Render."
       ],
-      "github": "https://github.com/krishthakur248",
-      "live": "https://krishthakur248.github.io/SkillXChange_Landing_Page/"
+      "github": "https://github.com/kapilthakur01",
+      "live": null
     },
     {
       "_id": "proj_003",
-      "slug": "meshguard",
-      "name": "MeshGuard",
-      "subtitle": "Offline Disaster Rescue & Survivor Tracking App",
-      "team": "Solo",
-      "role": "Developer",
-      "stack": ["Kotlin", "Jetpack Compose", "Google Nearby Connections API", "Room", "Foreground Service", "osmdroid"],
+      "slug": "perfectxams",
+      "name": "PerfectXams",
+      "subtitle": "Blockchain-Based Secure Examination Platform",
+      "team": "Team of 4",
+      "role": "Lead Contributor",
+      "stack": ["React.js", "Node.js", "Express.js", "MongoDB", "Solidity", "Hardhat", "AES Encryption", "JWT"],
       "highlights": [
-        "Offline-first Android app that relays survivor distress packets phone-to-phone via a gossip mesh.",
-        "Survivor/Rescuer roles, background broadcasting, and a rescuer dashboard with an offline map."
+        "Developed a blockchain-based secure examination platform with encrypted and time-locked exam papers.",
+        "Implemented blockchain notarization using Solidity and Hardhat, with AES encryption and SHA-256 integrity verification.",
+        "Built JWT-based authentication and responsive dashboards for Exam Authorities and Institution Organizers."
       ],
-      "github": "https://github.com/krishthakur248",
+      "github": "https://github.com/kapilthakur01",
       "live": null
     }
   ],
@@ -170,7 +173,7 @@
       "location": "Himachal Pradesh, India",
       "degree": "B.E. in Computer Science Engineering",
       "period": "2024 – 2028 (Expected)",
-      "cgpa": "9.94 / 10"
+      "cgpa": "9.0+ / 10"
     }
   ],
 
@@ -180,30 +183,30 @@
       "title": "LeetCode Problem Solving",
       "badge": "600+ Solved",
       "tag": "DSA & Algorithms",
-      "detail": "Solved 600+ problems on LeetCode with consistent practice in Arrays, Trees, Graphs, and Dynamic Programming."
+      "detail": "Solved 600+ problems on LeetCode across data structures and algorithms, strengthening core problem-solving and coding efficiency."
     },
     {
       "_id": "ach_002",
       "title": "AI & Emerging Technologies",
       "badge": "100 / 100",
       "tag": "Academic Excellence",
-      "detail": "Scored a perfect 100/100 in the AI & Emerging Technologies curriculum exam at Chitkara University."
+      "detail": "Scored 100/100 in the AI Masterclass examination on ChatGPT, DeepSeek, and Metaverse conducted at Chitkara University."
     },
     {
       "_id": "ach_003",
       "title": "HackIndia Hackathon",
       "badge": "100+ Teams",
       "tag": "Hackathon Demo",
-      "detail": "Collaborated with a team of four to build and demo a working full-stack prototype in a 24-hour sprint."
+      "detail": "Competed among 100+ teams at Chitkara University, collaborating under time constraints to build a functional prototype."
     }
   ],
 
   "contact": {
     "_id": "contact_001",
-    "email": "krishthakur248@gmail.com",
-    "phone": "+91 7018067797",
-    "github": "https://github.com/krishthakur248",
-    "linkedin": "https://linkedin.com/in/krish-thakur-/",
-    "location": "Himachal Pradesh, India"
+    "email": "thakurkapil2007@gmail.com",
+    "phone": "+91 7831970301",
+    "github": "https://github.com/kapilthakur01",
+    "linkedin": "https://www.linkedin.com/in/kapilthakur1/",
+    "location": "Parwanoo, Himachal Pradesh, India"
   }
 }

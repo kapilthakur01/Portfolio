@@ -12,7 +12,7 @@ registerCommand('resume', {
     if (flags.download) {
       const a = document.createElement('a');
       a.href = p.resume_pdf;
-      a.download = 'Krish_Thakur_Resume.pdf';
+      a.download = 'Kapil_Thakur_Resume.pdf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -61,7 +61,7 @@ registerCommand('resume', {
             }}>
               <img
                 src="/img/Me.jpeg"
-                alt="Krish Thakur"
+                alt="Kapil Thakur"
                 style={{
                   display: 'block',
                   width: '80px',
@@ -82,10 +82,10 @@ registerCommand('resume', {
                 letterSpacing: '0.06em',
                 whiteSpace: 'nowrap',
               }}>
-                Krish Thakur
+                Kapil Thakur
               </div>
               <div style={{ color: 'var(--text-dim)', whiteSpace: 'nowrap', fontSize: '0.9em' }}>
-                Software Engineer
+                MERN Stack Developer
               </div>
             </div>
           </div>
@@ -101,14 +101,14 @@ registerCommand('resume', {
             <div style={{ color: 'var(--text-muted)' }}>
               <span style={{ color: 'var(--text-dim)' }}>⊕  </span>
               GitHub →{' '}
-              <a href="https://github.com/krishthakur248" target="_blank" rel="noopener noreferrer"
-                style={{ color: 'var(--text-link)' }}>github.com/krishthakur248</a>
+              <a href="https://github.com/kapilthakur01" target="_blank" rel="noopener noreferrer"
+                style={{ color: 'var(--text-link)' }}>github.com/kapilthakur01</a>
             </div>
             <div style={{ color: 'var(--text-muted)' }}>
               <span style={{ color: 'var(--text-dim)' }}>⊕  </span>
               LinkedIn →{' '}
-              <a href="https://linkedin.com/in/krish-thakur-/" target="_blank" rel="noopener noreferrer"
-                style={{ color: 'var(--text-link)' }}>linkedin.com/in/krish-thakur-/</a>
+              <a href="https://www.linkedin.com/in/kapilthakur1/" target="_blank" rel="noopener noreferrer"
+                style={{ color: 'var(--text-link)' }}>linkedin.com/in/kapilthakur1/</a>
             </div>
           </div>
 
@@ -124,7 +124,7 @@ registerCommand('resume', {
           Chitkara University, Himachal Pradesh
         </div>
         <div style={{ color: 'var(--text-dim)' }}>
-          B.E. Computer Science Engineering{'  ·  '}2024–2028{'  ·  '}CGPA 9.94/10
+          B.E. Computer Science Engineering{'  ·  '}2024–2028{'  ·  '}CGPA 9.0+/10
         </div>
 
         {/* ── SKILLS ── */}
@@ -152,9 +152,9 @@ registerCommand('resume', {
         <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>· MERN platform with JWT auth and live ride tracking.</div>
         <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>· Route-aware matching via OSRM, H3, Socket.IO.</div>
         <div style={{ paddingLeft: '12px', marginBottom: '8px' }}>
-          <span style={{ color: 'var(--text-muted)' }}>↗ Live: </span>
-          <a href="https://krishthakur248.github.io/QuickPull/" target="_blank" rel="noopener noreferrer"
-            style={{ color: 'var(--text-link)' }}>krishthakur248.github.io/QuickPull/</a>
+          <span style={{ color: 'var(--text-muted)' }}>↗ GitHub: </span>
+          <a href="https://github.com/kapilthakur01" target="_blank" rel="noopener noreferrer"
+            style={{ color: 'var(--text-link)' }}>github.com/kapilthakur01</a>
         </div>
 
         <div style={{ color: 'var(--text-white)', fontWeight: 600 }}>
@@ -164,17 +164,17 @@ registerCommand('resume', {
         <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>· Full-stack skill exchange with auth and skill matching.</div>
         <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>· Jitsi Meet API for live mentoring. Deployed on Render.</div>
         <div style={{ paddingLeft: '12px', marginBottom: '8px' }}>
-          <span style={{ color: 'var(--text-muted)' }}>↗ Live: </span>
-          <a href="https://krishthakur248.github.io/SkillXChange_Landing_Page/" target="_blank" rel="noopener noreferrer"
-            style={{ color: 'var(--text-link)' }}>krishthakur248.github.io/SkillXChange_Landing_Page/</a>
+          <span style={{ color: 'var(--text-muted)' }}>↗ GitHub: </span>
+          <a href="https://github.com/kapilthakur01" target="_blank" rel="noopener noreferrer"
+            style={{ color: 'var(--text-link)' }}>github.com/kapilthakur01</a>
         </div>
 
         <div style={{ color: 'var(--text-white)', fontWeight: 600 }}>
-          MeshGuard — Android Disaster App{'  '}
-          <span style={{ color: 'var(--text-dim)', fontWeight: 400 }}>[Kotlin, Jetpack Compose, Nearby API]{'  '}·{'  '}Solo</span>
+          PerfectXams — Blockchain-Based Secure Examination Platform{'  '}
+          <span style={{ color: 'var(--text-dim)', fontWeight: 400 }}>[React.js, Node.js, Express.js, MongoDB, Solidity, Hardhat, AES Encryption, JWT]{'  '}·{'  '}Team of 4</span>
         </div>
-        <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>· Offline gossip mesh relaying survivor distress packets.</div>
-        <div style={{ color: 'var(--text-white)', paddingLeft: '12px', marginBottom: '8px' }}>· Rescuer dashboard with offline map (osmdroid).</div>
+        <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>· Blockchain-secured exam platform with AES encryption and JWT auth.</div>
+        <div style={{ color: 'var(--text-white)', paddingLeft: '12px', marginBottom: '8px' }}>· Smart contracts via Solidity/Hardhat for tamper-proof records.</div>
 
         {/* ── ACHIEVEMENTS ── */}
         <div style={sec}>ACHIEVEMENTS</div>

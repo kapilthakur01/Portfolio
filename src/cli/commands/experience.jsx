@@ -17,7 +17,7 @@ registerCommand('experience', {
           <div style={{ color: 'var(--text-white)', paddingLeft: '12px' }}>
             ·  Lead Contributor on Quick Pull (ride-sharing platform){'\n'}
             ·  Lead Contributor on SkillXchange (mentoring platform){'\n'}
-            ·  Solo developer of MeshGuard (Android disaster app){'\n'}
+            ·  Lead Contributor on PerfectXams (blockchain exam platform){'\n'}
           </div>
           <div style={{ color: 'var(--text-muted)', marginTop: '8px' }}>
             Run <span style={{ color: 'var(--text-primary)' }}>projects</span> or{' '}

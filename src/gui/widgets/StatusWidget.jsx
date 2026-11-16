@@ -11,7 +11,7 @@ export default function StatusWidget() {
     badge: 'STATUS',
     headline: 'Open to Roles',
     label: 'Full-stack / Android',
-    sub: 'Chitkara · CGPA 9.94',
+    sub: 'Chitkara · CGPA 9.0+',
     appTarget: 'contact',
   };
 

@@ -46,7 +46,7 @@ function Landing({ onPick, lastUsed }) {
         <div className={styles.avatarWrap}>
           <img
             src={photoSrc}
-            alt="Krish Thakur"
+            alt={profile?.name || 'Portfolio'}
             className={styles.avatar}
             width={124}
             height={124}
@@ -54,13 +54,13 @@ function Landing({ onPick, lastUsed }) {
         </div>
         <div className={styles.nameplate}>
           <span className={styles.nameDim}>visitor@</span>
-          <span className={styles.nameBright}>krish</span>
+          <span className={styles.nameBright}>{profile?.name?.split(' ')[0]?.toLowerCase() || 'kapil'}</span>
           <span className={styles.nameDim}>:~$</span>
         </div>
         <h1 className={styles.title}>
-          Krish Thakur
+          {profile?.name || 'Kapil Kumar Rajput'}
         </h1>
-        <p className={styles.role}>Software Engineer · Full-Stack &amp; Systems</p>
+        <p className={styles.role}>{profile?.role || 'MERN Stack Developer'} &middot; Full-Stack &amp; Systems</p>
       </header>
 
       <p className={styles.prompt}>Choose an interface:</p>
@@ -105,11 +105,11 @@ function Landing({ onPick, lastUsed }) {
       </div>
 
       <footer className={styles.footer}>
-        <a href="https://github.com/krishthakur248" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={profile?.links?.github || 'https://github.com/kapil'} target="_blank" rel="noopener noreferrer">GitHub</a>
         <span aria-hidden="true"> · </span>
-        <a href="https://linkedin.com/in/krish-thakur-/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={profile?.links?.linkedin || 'https://linkedin.com/in/kapil'} target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <span aria-hidden="true"> · </span>
-        <a href="mailto:krishthakur248@gmail.com">Email</a>
+        <a href={`mailto:${profile?.email || 'kr8724318@gmail.com'}`}>Email</a>
       </footer>
     </div>
   );

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+// ── UPDATE: Set your LeetCode username here ───────────────────────────────
+const LEETCODE_USERNAME = 'EJtucT1f8w'; // Kapil Thakur's LeetCode username
 export const DEFAULT_LEETCODE_COUNT = '600+';
 const STORAGE_KEY = 'leetcode_total_solved';
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
@@ -26,7 +28,7 @@ export function getCachedLeetCodeCount() {
 }
 
 /**
- * Fetches the live LeetCode solved count for krishthakur248.
+ * Fetches the live LeetCode solved count for EJtucT1f8w.
  * Tries the primary proxy first, then the secondary fallback proxy.
  * On success, persists to localStorage and broadcasts to all components.
  * On failure, returns the cached count (or '600+').
@@ -46,7 +48,7 @@ export async function fetchLeetCodeCount(force = false) {
   inFlightPromise = (async () => {
     // 1. Primary proxy endpoint
     try {
-      const res = await fetch('https://leetcode-stats-api.herokuapp.com/krishthakur248');
+      const res = await fetch(`https://leetcode-stats-api.herokuapp.com/${LEETCODE_USERNAME}`);
       if (res.ok) {
         const data = await res.json();
         if (data && typeof data.totalSolved === 'number' && data.totalSolved > 0) {
@@ -62,7 +64,7 @@ export async function fetchLeetCodeCount(force = false) {
 
     // 2. Secondary fallback proxy endpoint
     try {
-      const res2 = await fetch('https://alfa-leetcode-api.onrender.com/krishthakur248/solved');
+      const res2 = await fetch(`https://alfa-leetcode-api.onrender.com/${LEETCODE_USERNAME}/solved`);
       if (res2.ok) {
         const data2 = await res2.json();
         const solved = data2?.solvedProblem ?? data2?.totalSolved;
@@ -79,7 +81,7 @@ export async function fetchLeetCodeCount(force = false) {
 
     // 3. Tertiary fallback proxy endpoint
     try {
-      const res3 = await fetch('https://leetcode-api-faisalshohag.vercel.app/krishthakur248');
+      const res3 = await fetch(`https://leetcode-api-faisalshohag.vercel.app/${LEETCODE_USERNAME}`);
       if (res3.ok) {
         const data3 = await res3.json();
         if (data3 && typeof data3.totalSolved === 'number' && data3.totalSolved > 0) {

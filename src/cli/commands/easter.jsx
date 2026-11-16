@@ -24,16 +24,16 @@ Access granted. ✓
   ██║  ██║██║██║  ██║███████╗    ██║ ╚═╝ ██║███████╗
   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═╝╚══════╝
 
-Executing: hire Krish Thakur...
+Executing: hire Kapil Thakur...
 `}
           <span style={{ color: 'var(--text-white)' }}>
-            Smart call. He builds real things: ride-sharing platforms, offline mesh networks,{'\n'}
-            mentoring tools. CGPA 9.94. {getCachedLeetCodeCount()} LeetCode problems. MERN + Android + DSA.
+            Smart call. He builds real things: ride-sharing platforms, blockchain exam platforms,{'\n'}
+            mentoring tools. CGPA 9.0+. {getCachedLeetCodeCount()} LeetCode problems. MERN + Android + DSA.
           </span>
           {'\n\n'}
           <span style={{ color: 'var(--text-dim)' }}>Reach him at: </span>
-          <a href="mailto:krishthakur248@gmail.com" style={{ color: 'var(--text-link)' }}>
-            krishthakur248@gmail.com
+          <a href="mailto:thakurkapil2007@gmail.com" style={{ color: 'var(--text-link)' }}>
+            thakurkapil2007@gmail.com
           </a>
         </div>
       );
@@ -49,5 +49,4 @@ Executing: hire Krish Thakur...
     );
   },
 });
-
 

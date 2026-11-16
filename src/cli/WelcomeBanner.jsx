@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './WelcomeBanner.module.css';
 
-const ASCII_KRISH = `██╗  ██╗██████╗ ██╗███████╗██╗  ██╗
-██║ ██╔╝██╔══██╗██║██╔════╝██║  ██║
-█████╔╝ ██████╔╝██║███████╗███████║
-██╔═██╗ ██╔══██╗██║╚════██║██╔══██║
-██║  ██╗██║  ██║██║███████║██║  ██║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝`;
+const ASCII_KAPIL = `██╗  ██╗ █████╗ ██████╗ ██╗██╗     
+██║ ██╔╝██╔══██╗██╔══██╗██║██║     
+█████╔╝ ███████║██████╔╝██║██║     
+██╔═██╗ ██╔══██║██╔═══╝ ██║██║     
+██║  ██╗██║  ██║██║     ██║███████╗
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝`;
 
 /** Shared welcome text — identical in both modes */
 function WelcomeText() {
@@ -39,7 +39,7 @@ export default function WelcomeBanner({ windowed }) {
     return (
       <div style={{ fontFamily: 'var(--font-mono)' }}>
 
-        {/* Banner row: KRISH | [photo + info] — space-evenly */}
+        {/* Banner row: KAPIL | [photo + info] — space-evenly */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -51,10 +51,10 @@ export default function WelcomeBanner({ windowed }) {
           borderBottom: '1px solid var(--border)',
         }}>
 
-          {/* KRISH logo */}
+          {/* KAPIL logo */}
           <div style={{ whiteSpace: 'pre', lineHeight: 1.15, flexShrink: 0 }}>
             <span style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '13px' }}>
-              {ASCII_KRISH}
+              {ASCII_KAPIL}
             </span>
           </div>
 
@@ -71,7 +71,7 @@ export default function WelcomeBanner({ windowed }) {
             }}>
               <img
                 src="/img/Me.jpeg"
-                alt="Krish Thakur"
+                alt="Kapil Thakur"
                 style={{
                   display: 'block',
                   width: '108px',
@@ -86,27 +86,27 @@ export default function WelcomeBanner({ windowed }) {
             {/* Info */}
             <div style={{ whiteSpace: 'pre', lineHeight: 1.9 }}>
               <div style={{ color: 'var(--text-white)', fontWeight: 700, marginBottom: '6px' }}>
-                Krish Thakur
+                Kapil Thakur
               </div>
               <div style={{ borderBottom: '1px dashed var(--border-bright)', marginBottom: '8px', width: '220px' }} />
               <div>
                 <span style={{ color: 'var(--text-muted)' }}>{'role     →  '}</span>
-                <span style={{ color: 'var(--text-white)' }}>Software Engineer</span>
+                <span style={{ color: 'var(--text-white)' }}>MERN Stack Developer</span>
               </div>
               <div>
                 <span style={{ color: 'var(--text-muted)' }}>{'github   →  '}</span>
-                <a href="https://github.com/krishthakur248" target="_blank" rel="noopener noreferrer"
-                  style={{ color: 'var(--text-link)' }}>github/krishthakur248</a>
+                <a href="https://github.com/kapilthakur01" target="_blank" rel="noopener noreferrer"
+                  style={{ color: 'var(--text-link)' }}>github/kapilthakur01</a>
               </div>
               <div>
                 <span style={{ color: 'var(--text-muted)' }}>{'linkedin →  '}</span>
-                <a href="https://linkedin.com/in/krish-thakur-/" target="_blank" rel="noopener noreferrer"
-                  style={{ color: 'var(--text-link)' }}>in/krish-thakur</a>
+                <a href="https://www.linkedin.com/in/kapilthakur1/" target="_blank" rel="noopener noreferrer"
+                  style={{ color: 'var(--text-link)' }}>in/kapilthakur1</a>
               </div>
               <div>
                 <span style={{ color: 'var(--text-muted)' }}>{'email    →  '}</span>
-                <a href="mailto:krishthakur248@gmail.com"
-                  style={{ color: 'var(--text-link)' }}>krishthakur248@gmail.com</a>
+                <a href="mailto:thakurkapil2007@gmail.com"
+                  style={{ color: 'var(--text-link)' }}>thakurkapil2007@gmail.com</a>
               </div>
               <div>
                 <span style={{ color: 'var(--text-muted)' }}>{'stack    →  '}</span>
@@ -138,9 +138,9 @@ export default function WelcomeBanner({ windowed }) {
       {/* Full-mode banner row — CSS module handles centering + @media */}
       <div className={styles.bannerFull}>
 
-        {/* 1 — KRISH logo: fixed size, no stretching */}
+        {/* 1 — KAPIL logo: fixed size, no stretching */}
         <div className={styles.logoFull}>
-          <span className={styles.logoText}>{ASCII_KRISH}</span>
+          <span className={styles.logoText}>{ASCII_KAPIL}</span>
         </div>
 
         {/* 2 — Identity card: photo + info as one block */}
@@ -150,7 +150,7 @@ export default function WelcomeBanner({ windowed }) {
           <div className={styles.photoFrame}>
             <img
               src="/img/Me.jpeg"
-              alt="Krish Thakur"
+              alt="Kapil Thakur"
               className={styles.photo}
             />
           </div>
@@ -158,27 +158,27 @@ export default function WelcomeBanner({ windowed }) {
           {/* Info block */}
           <div className={styles.infoFull}>
             <div style={{ color: 'var(--text-white)', fontWeight: 700, marginBottom: '6px' }}>
-              Krish Thakur
+              Kapil Thakur
             </div>
             <div style={{ borderBottom: '1px dashed var(--border-bright)', marginBottom: '8px', width: '220px' }} />
             <div>
               <span style={{ color: 'var(--text-muted)' }}>{'role     →  '}</span>
-              <span style={{ color: 'var(--text-white)' }}>Software Engineer</span>
+              <span style={{ color: 'var(--text-white)' }}>MERN Stack Developer</span>
             </div>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>{'github   →  '}</span>
-              <a href="https://github.com/krishthakur248" target="_blank" rel="noopener noreferrer"
-                style={{ color: 'var(--text-link)' }}>github/krishthakur248</a>
+              <a href="https://github.com/kapilthakur01" target="_blank" rel="noopener noreferrer"
+                style={{ color: 'var(--text-link)' }}>github/kapilthakur01</a>
             </div>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>{'linkedin →  '}</span>
-              <a href="https://linkedin.com/in/krish-thakur-/" target="_blank" rel="noopener noreferrer"
-                style={{ color: 'var(--text-link)' }}>in/krish-thakur</a>
+              <a href="https://www.linkedin.com/in/kapilthakur1/" target="_blank" rel="noopener noreferrer"
+                style={{ color: 'var(--text-link)' }}>in/kapilthakur1</a>
             </div>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>{'email    →  '}</span>
-              <a href="mailto:krishthakur248@gmail.com"
-                style={{ color: 'var(--text-link)' }}>krishthakur248@gmail.com</a>
+              <a href="mailto:thakurkapil2007@gmail.com"
+                style={{ color: 'var(--text-link)' }}>thakurkapil2007@gmail.com</a>
             </div>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>{'stack    →  '}</span>

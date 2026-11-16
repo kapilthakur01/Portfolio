@@ -36,7 +36,7 @@ export default function Welcome({ winId }) {
           <span className={welcomeStyles.heroBadge}>Portfolio Desktop</span>
           <h2 className={welcomeStyles.heading}>{profile.name}</h2>
           <p className={welcomeStyles.subheading}>
-            {profile.role} · Chitkara University (CGPA 9.94)
+            {profile.role} · Chitkara University (CGPA 9.0+)
           </p>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function Welcome({ winId }) {
           <div className={welcomeStyles.cardBody}>
             <span className={welcomeStyles.cardTitle}>Projects &amp; Apps</span>
             <span className={welcomeStyles.cardDesc}>
-              Launch Quick Pull, SkillXchange, and MeshGuard from the dock or desktop.
+              Launch Quick Pull, SkillXchange, and PerfectXams from the dock or desktop.
             </span>
           </div>
         </div>

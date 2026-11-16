@@ -12,7 +12,7 @@ import styles from '../styles/gui/MenuBar.module.css';
 export default function MenuBar({ switchMode, activeAppTitle }) {
   const { time, date } = useClock();
   const gui = getGuiConfig();
-  const name = gui.menuBarName ?? 'Krish Thakur';
+  const name = gui.menuBarName ?? 'Kapil Thakur';
 
   const [activeMenu, setActiveMenu] = useState(null);
   const menuRef = useRef(null);

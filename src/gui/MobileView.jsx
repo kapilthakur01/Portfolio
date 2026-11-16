@@ -37,7 +37,7 @@ export default function MobileView({ switchMode }) {
   return (
     <div className={styles.home}>
       <div className={styles.header}>
-        <h1 className={styles.name}>Krish Thakur</h1>
+        <h1 className={styles.name}>Kapil Thakur</h1>
         <p className={styles.sub}>Portfolio</p>
       </div>
       <div className={styles.grid} role="list">

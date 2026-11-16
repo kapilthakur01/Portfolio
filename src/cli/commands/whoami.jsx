@@ -11,7 +11,7 @@ function NeofetchOutput({ profile }) {
     { label: 'name',     value: profile.name },
     { label: 'role',     value: profile.role },
     { label: 'edu',      value: 'Chitkara University, CSE' },
-    { label: 'cgpa',     value: '9.94 / 10' },
+    { label: 'cgpa',     value: '9.0+ / 10' },
     { label: 'stack',    value: 'MERN · Android · DSA' },
     { label: 'github',   value: profile.links.github,   link: true },
     { label: 'linkedin', value: profile.links.linkedin, link: true },
@@ -40,7 +40,7 @@ function NeofetchOutput({ profile }) {
       >
         <img
           src={profile.photo}
-          alt="Krish Thakur"
+          alt="Kapil Thakur"
           style={{
             display: 'block',
             width: '140px',

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Kapil Thakur — Interactive Dual-Mode Portfolio
 
 > A developer portfolio that works two ways: a **macOS-style GUI desktop** and a **fully interactive CLI terminal** — pick your interface.
@@ -189,3 +190,6 @@ Portfolio/
 ---
 
 © 2026 Kapil Thakur. Built with React and Vite.
+=======
+# Portfolio
+>>>>>>> 07c34a67a5e88a64fe0d509755920658c02f87c2

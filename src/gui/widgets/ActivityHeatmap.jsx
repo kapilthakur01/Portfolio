@@ -6,9 +6,9 @@
 import React, { useMemo } from 'react';
 import styles from '../../styles/gui/ActivityWidget.module.css';
 
-// Colors: index = level 0–4
-const GITHUB_COLORS = ['#1a1f2e', '#0e4429', '#006d32', '#26a641', '#39d353'];
-const LEETCODE_COLORS = ['#1a1f2e', '#f5a623', '#e8820c', '#d6600a', '#c44a08'];
+// Colors: index = level 0–4  (both GitHub & LeetCode use green)
+const GITHUB_COLORS   = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+const LEETCODE_COLORS = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
 
 const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const SHOWN_DAYS = [0, 2, 4]; // Sun, Tue, Thu rows to label

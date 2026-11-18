@@ -1,19 +1,17 @@
 /**
  * ActivityHeatmap.jsx
- * Reusable contribution heatmap grid (GitHub / LeetCode style).
- * Shows last 52 weeks (Sun–Sat columns).
+ * GitHub-style contribution heatmap.
+ * Cell: 10×10px, gap: 2px → column pitch = 12px, row pitch = 12px
+ * 7 rows (Sun–Sat), up to maxWeeks columns.
  */
 import React, { useMemo } from 'react';
 import styles from '../../styles/gui/ActivityWidget.module.css';
 
-// Colors: index = level 0–4  (both GitHub & LeetCode use green)
-const GITHUB_COLORS   = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
-const LEETCODE_COLORS = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+// Both GitHub and LeetCode use green cells
+const GREEN = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
 
-const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const SHOWN_DAYS = [0, 2, 4]; // Sun, Tue, Thu rows to label
+const DAY_LABELS = ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
 
-/** Build month labels from weeks */
 function buildMonthLabels(weeks) {
   const labels = [];
   let lastMonth = -1;
@@ -30,10 +28,11 @@ function buildMonthLabels(weeks) {
   return labels;
 }
 
-export default function ActivityHeatmap({ weeks = [], variant = 'github', maxWeeks = 52 }) {
-  const colors = variant === 'leetcode' ? LEETCODE_COLORS : GITHUB_COLORS;
+const CELL = 10;   // cell size px
+const GAP  = 2;    // gap px
+const PITCH = CELL + GAP; // 12px per column / row
 
-  // Only show last maxWeeks weeks
+export default function ActivityHeatmap({ weeks = [], variant = 'github', maxWeeks = 52 }) {
   const displayWeeks = useMemo(() => {
     if (weeks.length <= maxWeeks) return weeks;
     return weeks.slice(weeks.length - maxWeeks);
@@ -45,43 +44,65 @@ export default function ActivityHeatmap({ weeks = [], variant = 'github', maxWee
     return <div className={styles.loading}>Loading activity…</div>;
   }
 
+  const numWeeks = displayWeeks.length;
+  const gridW = numWeeks * PITCH - GAP;  // exact pixel width of the cell area
+  const gridH = 7 * PITCH - GAP;        // exact pixel height
+
   return (
     <div className={styles.heatmapWrap}>
-      {/* Month label row */}
+
+      {/* Month labels — absolutely positioned over the grid */}
       <div className={styles.monthRow}>
         <div className={styles.dayLabelSpacer} />
-        <div className={styles.monthLabels} style={{ gridTemplateColumns: `repeat(${displayWeeks.length}, 11px)` }}>
-          {displayWeeks.map((_, wi) => {
-            const ml = monthLabels.find((m) => m.wi === wi);
-            return (
-              <div key={wi} className={styles.monthCell}>
-                {ml ? <span className={styles.monthLabel}>{ml.label}</span> : null}
-              </div>
-            );
-          })}
+        <div style={{ position: 'relative', flex: 1, height: 12, overflow: 'hidden' }}>
+          {monthLabels.map(({ wi, label }) => (
+            <span
+              key={wi}
+              className={styles.monthLabel}
+              style={{ position: 'absolute', left: wi * PITCH }}
+            >
+              {label}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Grid body: day labels + cell columns */}
+      {/* Grid body: day labels + cell grid */}
       <div className={styles.gridBody}>
+
         {/* Day-of-week labels */}
         <div className={styles.dayLabels}>
-          {[0, 1, 2, 3, 4, 5, 6].map((dow) => (
-            <div key={dow} className={styles.dayLabel}>
-              {SHOWN_DAYS.includes(dow) ? DAY_LABELS[dow] : ''}
-            </div>
+          {DAY_LABELS.map((label, i) => (
+            <div key={i} className={styles.dayLabel}>{label}</div>
           ))}
         </div>
 
-        {/* Week columns */}
-        <div className={styles.weeksGrid} style={{ gridTemplateColumns: `repeat(${displayWeeks.length}, 11px)` }}>
+        {/* Cell grid — fixed pixel size, no flex stretch */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateRows: `repeat(7, ${CELL}px)`,
+            gridTemplateColumns: `repeat(${numWeeks}, ${CELL}px)`,
+            gap: `${GAP}px`,
+            gridAutoFlow: 'column',
+            flexShrink: 0,
+            overflow: 'hidden',
+            width: gridW,
+            height: gridH,
+          }}
+        >
           {displayWeeks.map((week, wi) =>
             week.days.map((day, di) => (
               <div
                 key={`${wi}-${di}`}
-                className={styles.cell}
-                style={{ background: day ? colors[day.level ?? 0] : 'transparent' }}
-                title={day ? `${day.date}: ${day.count} contribution${day.count !== 1 ? 's' : ''}` : ''}
+                style={{
+                  width: CELL,
+                  height: CELL,
+                  borderRadius: 2,
+                  backgroundColor: day ? GREEN[day.level ?? 0] : 'transparent',
+                  flexShrink: 0,
+                }}
+                title={day ? `${day.date}: ${day.count}` : ''}
               />
             ))
           )}
@@ -91,8 +112,8 @@ export default function ActivityHeatmap({ weeks = [], variant = 'github', maxWee
       {/* Legend */}
       <div className={styles.legend}>
         <span className={styles.legendLabel}>Less</span>
-        {colors.map((c, i) => (
-          <div key={i} className={styles.cell} style={{ background: c }} />
+        {GREEN.map((c, i) => (
+          <div key={i} style={{ width: CELL, height: CELL, borderRadius: 2, background: c, flexShrink: 0 }} />
         ))}
         <span className={styles.legendLabel}>More</span>
       </div>

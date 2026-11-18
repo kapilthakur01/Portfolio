@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react';
 
 const LEETCODE_USERNAME = 'EJtucT1f8w';
-const STORAGE_KEY = 'leetcode_activity_v2';
+const STORAGE_KEY = 'leetcode_activity_v3';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 min
 
 let inFlightPromise = null;
@@ -79,7 +79,7 @@ function buildWeeks(days) {
   return weeks;
 }
 
-function computeStats(days) {
+function computeStats(days, apiStreak = null, apiMaxStreak = null, apiActiveDays = null) {
   let totalActive = 0, maxStreak = 0, cur = 0, currentStreak = 0;
   for (const d of days) {
     if (d.count > 0) { totalActive++; cur++; maxStreak = Math.max(maxStreak, cur); }
@@ -90,7 +90,13 @@ function computeStats(days) {
     else break;
   }
   const totalSubmissions = days.reduce((s, d) => s + d.count, 0);
-  return { totalActive, maxStreak, currentStreak, totalSubmissions };
+  // Prefer API-provided values when available (more accurate)
+  return {
+    totalActive:    apiActiveDays  != null ? apiActiveDays  : totalActive,
+    maxStreak:      apiMaxStreak   != null ? apiMaxStreak   : maxStreak,
+    currentStreak:  apiStreak      != null ? apiStreak      : currentStreak,
+    totalSubmissions,
+  };
 }
 
 export async function fetchLeetcodeActivity(force = false) {
@@ -112,7 +118,11 @@ export async function fetchLeetcodeActivity(force = false) {
         if (cal) {
           const days = parseCalendar(cal);
           const weeks = buildWeeks(days);
-          const stats = computeStats(days);
+          // alfa-leetcode-api returns streak, totalActiveDays, maxStreak at top level
+          const apiStreak      = json?.streak       != null ? Number(json.streak)       : null;
+          const apiMaxStreak   = json?.maxStreak     != null ? Number(json.maxStreak)    : null;
+          const apiActiveDays  = json?.totalActiveDays != null ? Number(json.totalActiveDays) : null;
+          const stats = computeStats(days, apiStreak, apiMaxStreak, apiActiveDays);
           const data = {
             weeks,
             ...stats,
@@ -137,7 +147,10 @@ export async function fetchLeetcodeActivity(force = false) {
         if (cal) {
           const days = parseCalendar(cal);
           const weeks = buildWeeks(days);
-          const stats = computeStats(days);
+          const apiStreak     = json?.streak       != null ? Number(json.streak)       : null;
+          const apiMaxStreak  = json?.maxStreak     != null ? Number(json.maxStreak)    : null;
+          const apiActiveDays = json?.totalActiveDays != null ? Number(json.totalActiveDays) : null;
+          const stats = computeStats(days, apiStreak, apiMaxStreak, apiActiveDays);
           const data = {
             weeks,
             ...stats,

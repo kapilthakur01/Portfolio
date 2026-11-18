@@ -1,13 +1,16 @@
-<<<<<<< HEAD
 # Kapil Thakur — Interactive Dual-Mode Portfolio
 
 > A developer portfolio that works two ways: a **macOS-style GUI desktop** and a **fully interactive CLI terminal** — pick your interface.
 
 ---
 
-## 🔗 Live Deployment
+## 🔗 Live Links
 
-Coming soon
+| Project | URL |
+|---------|-----|
+| **Portfolio** | [kapil-wt1r.onrender.com](https://kapil-wt1r.onrender.com/) |
+| **Quick Pull** | [krishthakur248.github.io/QuickPull](https://krishthakur248.github.io/QuickPull/) |
+| **SkillXchange** | [krishthakur248.github.io/SkillXChange_Landing_Page](https://krishthakur248.github.io/SkillXChange_Landing_Page/) |
 
 ---
 
@@ -20,6 +23,8 @@ Coming soon
 | **Interactive CLI** | Real shell with 15+ commands, tab completion, filesystem, piping |
 | **MongoDB Backend** | Portfolio data served from MongoDB Atlas via Express API |
 | **Live LeetCode Stats** | Real-time problem count from LeetCode API |
+| **GitHub Activity** | Live GitHub contribution heatmap widget on the desktop |
+| **LeetCode Activity** | Live LeetCode submission heatmap widget on the desktop |
 | **Responsive** | Fully responsive — mobile-optimized views for both modes |
 | **No frameworks overhead** | Pure React + CSS Modules — no Tailwind, no UI libraries |
 
@@ -29,11 +34,11 @@ Coming soon
 
 A faithful macOS-inspired desktop environment:
 
-- **Menu bar** with live clock
+- **Menu bar** with app title
 - **Desktop icons** for each app (About, Projects, Skills, Resume, etc.)
 - **Dock** with app launchers and tooltips
 - **Draggable, resizable windows** (react-rnd)
-- **Widgets layer** — weather, world clocks, DSA focus, status
+- **Widgets layer** — GitHub activity heatmap, LeetCode heatmap, DSA focus, status, calendar
 - **Spotlight search** (⌘K) — fuzzy-search apps, commands, and links
 
 ### Apps
@@ -41,7 +46,7 @@ A faithful macOS-inspired desktop environment:
 | App | What it shows |
 |-----|---------------|
 | About | Photo, bio, role, links |
-| Projects | Card grid → detail view with stack pills and highlights |
+| Projects | Card grid → detail view with stack pills, highlights, and **live demo link** |
 | Skills | Categorized skill list with tech icons |
 | Experience | Education, work (if any), achievements timeline |
 | Resume | PDF viewer with download button |
@@ -81,11 +86,29 @@ gui           Switch to GUI mode
 
 ---
 
+## 🚀 Projects
+
+### Quick Pull
+**Real-Time Peer-to-Peer Ride-Sharing System**  
+🔗 [Live Demo](https://krishthakur248.github.io/QuickPull/)  
+Stack: JavaScript, Node.js, Express.js, MongoDB, Socket.IO, OSRM, H3, Turf.js
+
+### SkillXchange
+**Mutual Mentoring Learning Platform**  
+🔗 [Live Demo](https://krishthakur248.github.io/SkillXChange_Landing_Page/)  
+Stack: Node.js, Express.js, MongoDB, JavaScript, Jitsi Meet API
+
+### PerfectXams
+**Blockchain-Based Secure Examination Platform**  
+Stack: React.js, Node.js, Express.js, MongoDB, Solidity, Hardhat, AES Encryption, JWT
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer | Tech |
 |-------|------|
-| Frontend | React 18, Vite 6, CSS Modules, Framer Motion |
+| Frontend | React 18, Vite 6, CSS Modules |
 | Backend | Node.js, Express, Mongoose |
 | Database | MongoDB Atlas |
 | State | Zustand (window manager), React hooks |
@@ -160,7 +183,9 @@ Portfolio/
 │   │   └── demoData.json    # Local fallback data
 │   ├── services/
 │   │   ├── dataService.js   # MongoDB API + local fallback
-│   │   └── leetcodeService.js
+│   │   ├── leetcodeService.js
+│   │   ├── leetcodeActivityService.js
+│   │   └── githubService.js
 │   ├── cli/                 # Terminal mode
 │   │   ├── Terminal.jsx
 │   │   ├── WelcomeBanner.jsx
@@ -186,10 +211,8 @@ Portfolio/
 - **GitHub**: [github.com/kapilthakur01](https://github.com/kapilthakur01)
 - **LinkedIn**: [linkedin.com/in/kapilthakur1](https://www.linkedin.com/in/kapilthakur1/)
 - **LeetCode**: [leetcode.com/u/EJtucT1f8w](https://leetcode.com/u/EJtucT1f8w/)
+- **Portfolio**: [kapil-wt1r.onrender.com](https://kapil-wt1r.onrender.com/)
 
 ---
 
 © 2026 Kapil Thakur. Built with React and Vite.
-=======
-# Portfolio
->>>>>>> 07c34a67a5e88a64fe0d509755920658c02f87c2

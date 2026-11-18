@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Users, Award, ArrowLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, Users, Award, ArrowLeft, ChevronRight, Radio } from 'lucide-react';
 import { getProjectsSync as getProjects } from '../../services/dataService.js';
 import { getSkillIcon, CheckIcon, GithubIcon } from './SkillIcons.jsx';
 import styles from '../../styles/gui/AppPanel.module.css';
@@ -150,7 +150,15 @@ export default function Projects() {
           >
             <div className={projStyles.cardTop}>
               <span className={projStyles.cardName}>{p.name}</span>
-              <ChevronRight size={16} aria-hidden="true" className={projStyles.arrow} />
+              <div className={projStyles.cardTopRight}>
+                {p.live && (
+                  <span className={projStyles.liveBadge}>
+                    <Radio size={9} aria-hidden="true" />
+                    Live
+                  </span>
+                )}
+                <ChevronRight size={16} aria-hidden="true" className={projStyles.arrow} />
+              </div>
             </div>
             <p className={projStyles.cardSub}>{p.subtitle}</p>
 
@@ -187,6 +195,21 @@ export default function Projects() {
                 <span className={projStyles.cardTagMore}>+{p.stack.length - 4}</span>
               )}
             </div>
+
+            {/* Live link button on card */}
+            {p.live && (
+              <a
+                href={p.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={projStyles.cardLiveBtn}
+                onClick={(e) => e.stopPropagation()}
+                aria-label={`Open ${p.name} live demo`}
+              >
+                <ExternalLink size={12} aria-hidden="true" />
+                <span>View Live</span>
+              </a>
+            )}
           </button>
         ))}
       </div>

@@ -43,6 +43,53 @@
   margin-bottom: 6px;
 }
 
+.cardTopRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Live badge on card */
+.liveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #4ecca3;
+  background: rgba(78, 204, 163, 0.12);
+  border: 1px solid rgba(78, 204, 163, 0.35);
+  padding: 2px 7px;
+  border-radius: 9999px;
+}
+
+/* Live button at bottom of card in list view */
+.cardLiveBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--gui-font-ui);
+  color: #090c14;
+  background: #4ecca3;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 140ms ease, transform 140ms ease;
+  align-self: flex-start;
+}
+
+.cardLiveBtn:hover {
+  background: #3ebf96;
+  transform: translateY(-1px);
+}
+
 .cardName {
   font-size: 17px;
   font-weight: 700;

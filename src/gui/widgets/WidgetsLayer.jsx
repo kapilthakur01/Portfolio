@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import DraggableWidget from './DraggableWidget.jsx';
 import CalendarWidget from './CalendarWidget.jsx';
-import WorldClockWidget from './WorldClockWidget.jsx';
-import WeatherWidget from './WeatherWidget.jsx';
 import DsaFocusWidget from './DsaFocusWidget.jsx';
 import StatusWidget from './StatusWidget.jsx';
+import GithubActivityWidget from './GithubActivityWidget.jsx';
+import LeetcodeActivityWidget from './LeetcodeActivityWidget.jsx';
 import SpotlightBar from './SpotlightBar.jsx';
 import {
   WIDGET_DIMENSIONS,
@@ -14,7 +14,7 @@ import {
 } from './widgetLayout.js';
 import styles from '../../styles/gui/Widgets.module.css';
 
-const STORAGE_KEY = 'gui_widgets_positions_v3';
+const STORAGE_KEY = 'gui_widgets_positions_v4';
 
 export default function WidgetsLayer({ switchMode }) {
   // Initialize positions from localStorage or compute clean default layout
@@ -54,13 +54,13 @@ export default function WidgetsLayer({ switchMode }) {
     return computeDefaultWidgetPositions(1440, 900);
   });
 
-  // Active z-index management to bring dragged widget to front
+  // Active z-index management
   const [zIndices, setZIndices] = useState({
     calendar: 20,
     dsaFocus: 20,
     status: 20,
-    worldClock: 20,
-    weather: 20,
+    githubActivity: 20,
+    leetcodeActivity: 20,
     spotlight: 25,
   });
   const [highestZ, setHighestZ] = useState(25);
@@ -82,7 +82,6 @@ export default function WidgetsLayer({ switchMode }) {
       } catch (err) {
         console.warn('Could not save widget positions to localStorage:', err);
       }
-      // Broadcast widget positions change so desktop icon collision check stays in sync
       window.dispatchEvent(
         new CustomEvent('portfolio:widgetPositionsChanged', { detail: updated })
       );
@@ -90,7 +89,7 @@ export default function WidgetsLayer({ switchMode }) {
     });
   }, []);
 
-  // Reset layout handler (triggered from MenuBar or right-click context menu)
+  // Reset layout handler
   const handleResetLayout = useCallback(() => {
     try {
       localStorage.removeItem(STORAGE_KEY);
@@ -104,13 +103,12 @@ export default function WidgetsLayer({ switchMode }) {
     );
   }, []);
 
-  // Listen for reset layout event
   useEffect(() => {
     window.addEventListener('portfolio:resetLayout', handleResetLayout);
     return () => window.removeEventListener('portfolio:resetLayout', handleResetLayout);
   }, [handleResetLayout]);
 
-  // Window resize handler: re-clamp or recalculate
+  // Window resize: re-clamp or recalculate
   useEffect(() => {
     function handleResize() {
       const vw = window.innerWidth;
@@ -118,15 +116,10 @@ export default function WidgetsLayer({ switchMode }) {
 
       setPositions((prev) => {
         let hasSaved = false;
-        try {
-          hasSaved = Boolean(localStorage.getItem(STORAGE_KEY));
-        } catch (e) {}
+        try { hasSaved = Boolean(localStorage.getItem(STORAGE_KEY)); } catch (e) {}
 
-        if (!hasSaved) {
-          return computeDefaultWidgetPositions(vw, vh);
-        }
+        if (!hasSaved) return computeDefaultWidgetPositions(vw, vh);
 
-        // Clamp saved positions inside new viewport dimensions
         const clamped = {};
         Object.entries(prev).forEach(([id, p]) => {
           const dim = WIDGET_DIMENSIONS[id] || { width: 180, height: 140 };
@@ -134,7 +127,6 @@ export default function WidgetsLayer({ switchMode }) {
           const maxX = Math.max(minX, vw - dim.width - 12);
           const minY = MENU_BAR_HEIGHT + 8;
           const maxY = Math.max(minY, vh - DOCK_HEIGHT - dim.height - 12);
-
           clamped[id] = {
             x: Math.max(minX, Math.min(maxX, p.x)),
             y: Math.max(minY, Math.min(maxY, p.y)),
@@ -150,17 +142,18 @@ export default function WidgetsLayer({ switchMode }) {
 
   return (
     <div className={styles.widgetsCanvas} aria-label="Desktop Widgets">
-      {/* ── 1. Calendar Widget ── */}
+
+      {/* ── 1. GitHub Activity Widget (top-left, wide) ── */}
       <DraggableWidget
-        id="calendar"
-        pos={positions.calendar}
+        id="githubActivity"
+        pos={positions.githubActivity}
         onPosChange={handlePosChange}
         onDragStart={bringToFront}
-        zIndex={zIndices.calendar}
-        width={WIDGET_DIMENSIONS.calendar.width}
-        height={WIDGET_DIMENSIONS.calendar.height}
+        zIndex={zIndices.githubActivity}
+        width={WIDGET_DIMENSIONS.githubActivity.width}
+        height={WIDGET_DIMENSIONS.githubActivity.height}
       >
-        <CalendarWidget />
+        <GithubActivityWidget />
       </DraggableWidget>
 
       {/* ── 2. DSA Focus Widget ── */}
@@ -189,30 +182,30 @@ export default function WidgetsLayer({ switchMode }) {
         <StatusWidget />
       </DraggableWidget>
 
-      {/* ── 4. World Clock Widget ── */}
+      {/* ── 4. LeetCode Activity Widget (bottom-left, wide) ── */}
       <DraggableWidget
-        id="worldClock"
-        pos={positions.worldClock}
+        id="leetcodeActivity"
+        pos={positions.leetcodeActivity}
         onPosChange={handlePosChange}
         onDragStart={bringToFront}
-        zIndex={zIndices.worldClock}
-        width={WIDGET_DIMENSIONS.worldClock.width}
-        height={WIDGET_DIMENSIONS.worldClock.height}
+        zIndex={zIndices.leetcodeActivity}
+        width={WIDGET_DIMENSIONS.leetcodeActivity.width}
+        height={WIDGET_DIMENSIONS.leetcodeActivity.height}
       >
-        <WorldClockWidget />
+        <LeetcodeActivityWidget />
       </DraggableWidget>
 
-      {/* ── 5. Weather Widget ── */}
+      {/* ── 5. Calendar Widget (top-right) ── */}
       <DraggableWidget
-        id="weather"
-        pos={positions.weather}
+        id="calendar"
+        pos={positions.calendar}
         onPosChange={handlePosChange}
         onDragStart={bringToFront}
-        zIndex={zIndices.weather}
-        width={WIDGET_DIMENSIONS.weather.width}
-        height={WIDGET_DIMENSIONS.weather.height}
+        zIndex={zIndices.calendar}
+        width={WIDGET_DIMENSIONS.calendar.width}
+        height={WIDGET_DIMENSIONS.calendar.height}
       >
-        <WeatherWidget />
+        <CalendarWidget />
       </DraggableWidget>
 
       {/* ── 6. Spotlight Search Bar + Quick Actions ── */}

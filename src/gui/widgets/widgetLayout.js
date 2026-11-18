@@ -4,45 +4,44 @@
  */
 
 export const WIDGET_DIMENSIONS = {
-  calendar:   { width: 170, height: 170 },
-  dsaFocus:   { width: 163, height: 124 },
-  status:     { width: 163, height: 124 },
-  worldClock: { width: 340, height: 170 },
-  weather:    { width: 340, height: 170 },
-  spotlight:  { width: 540, height: 50 },
+  calendar:        { width: 170,  height: 170  },
+  dsaFocus:        { width: 163,  height: 124  },
+  status:          { width: 163,  height: 124  },
+  githubActivity:  { width: 460,  height: 190  },
+  leetcodeActivity:{ width: 460,  height: 190  },
+  spotlight:       { width: 540,  height: 50   },
 };
 
 export const MENU_BAR_HEIGHT = 32;
 export const DOCK_HEIGHT = 88;
 
-export const DEFAULT_WIDGET_POSITIONS = {
-  calendar:   { x: 48,  y: 56 },
-  dsaFocus:   { x: 48,  y: 490 },
-  status:     { x: 224, y: 490 },
-  worldClock: { x: 232, y: 56 },
-  weather:    { x: 48,  y: 296 },
-  spotlight:  { x: 528, y: 232 },
-};
-
 /**
  * Computes non-overlapping default positions for all widgets and spotlight.
- * Adheres precisely to the user's layout specification.
+ * Layout matches the reference image:
+ *   - githubActivity: top-left
+ *   - dsaFocus + status: mid-left (twin row)
+ *   - leetcodeActivity: bottom-left
+ *   - calendar: top-right (near desktop icons)
+ *   - spotlight: horizontal center
  */
 export function computeDefaultWidgetPositions(vw = 1440, vh = 900) {
+  const leftX = 16;
+
+  // Spotlight centered horizontally
   const spotlightW = 540;
-  let spotX = 528;
-  // If viewport width is narrower than spotlight starting boundary, keep it within screen bounds
-  if (vw < 528 + spotlightW + 20) {
-    spotX = Math.max(48, vw - spotlightW - 20);
-  }
+  let spotX = Math.round((vw - spotlightW) / 2);
+  if (spotX < 200) spotX = 200;
+
+  // Calendar sits top-right, leaving room for desktop icons (~100px wide)
+  const calendarX = Math.max(vw - 110 - 170 - 16, vw - 300);
 
   return {
-    calendar:   { x: 48,  y: 56 },
-    dsaFocus:   { x: 48,  y: 490 },
-    status:     { x: 224, y: 490 },
-    worldClock: { x: 232, y: 56 },
-    weather:    { x: 48,  y: 296 },
-    spotlight:  { x: spotX, y: 232 },
+    githubActivity:   { x: leftX, y: 48 },
+    dsaFocus:         { x: leftX, y: 48 + 190 + 12 },
+    status:           { x: leftX + 163 + 14, y: 48 + 190 + 12 },
+    leetcodeActivity: { x: leftX, y: 48 + 190 + 12 + 124 + 12 },
+    calendar:         { x: calendarX, y: 48 },
+    spotlight:        { x: spotX, y: Math.round((vh - DOCK_HEIGHT) / 2 - 25) },
   };
 }
 
@@ -65,16 +64,9 @@ export function resolveDesktopIconPositions(vw, vh, widgetPositions, desktopAppI
   const rightX = Math.max(vw - 110, 750);
   const occupiedRects = [];
 
-  // Add all widget rects
   Object.entries(widgetPositions).forEach(([id, pos]) => {
     const dim = WIDGET_DIMENSIONS[id] || { width: 180, height: 140 };
-    occupiedRects.push({
-      id,
-      x: pos.x,
-      y: pos.y,
-      w: dim.width,
-      h: dim.height,
-    });
+    occupiedRects.push({ id, x: pos.x, y: pos.y, w: dim.width, h: dim.height });
   });
 
   const finalIconPositions = {};
@@ -86,12 +78,10 @@ export function resolveDesktopIconPositions(vw, vh, widgetPositions, desktopAppI
     let targetX = rightX;
     let targetY = initialYList[index % initialYList.length];
 
-    // Check collision against all occupied rectangles
     let hasCollision = occupiedRects.some((r) =>
       checkRectCollision({ x: targetX, y: targetY, w: iconW, h: iconH }, r)
     );
 
-    // If colliding, find nearest open grid slot starting from right column moving left
     if (hasCollision) {
       outer: for (let col = rightX; col >= 200; col -= 100) {
         for (let row = 60; row <= vh - DOCK_HEIGHT - 90; row += 120) {
@@ -112,4 +102,3 @@ export function resolveDesktopIconPositions(vw, vh, widgetPositions, desktopAppI
 
   return finalIconPositions;
 }
-

@@ -16,8 +16,8 @@ export const WIDGET_DIMENSIONS = {
   calendar:         { width: 170, height: 170 },
   dsaFocus:         { width: 163, height: 118 },
   status:           { width: 163, height: 118 },
-  githubActivity:   { width: 460, height: 200 },
-  leetcodeActivity: { width: 460, height: 200 },
+  githubActivity:   { width: 460, height: 230 },
+  leetcodeActivity: { width: 460, height: 230 },
   spotlight:        { width: 540, height: 50  },
 };
 
@@ -29,9 +29,9 @@ const START_Y = MENU_BAR_HEIGHT + 16;   // 48
 const GAP     = 10;
 
 export function computeDefaultWidgetPositions(vw = 1440, vh = 900) {
-  const ghH   = WIDGET_DIMENSIONS.githubActivity.height;    // 200
+  const ghH   = WIDGET_DIMENSIONS.githubActivity.height;    // 230
   const twinH = WIDGET_DIMENSIONS.dsaFocus.height;          // 118
-  const lcH   = WIDGET_DIMENSIONS.leetcodeActivity.height;  // 200
+  const lcH   = WIDGET_DIMENSIONS.leetcodeActivity.height;  // 230
 
   const ghY   = START_Y;                   // 48
   const twinY = ghY   + ghH   + GAP;      // 258

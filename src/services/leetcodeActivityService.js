@@ -5,8 +5,22 @@
 import { useState, useEffect } from 'react';
 
 const LEETCODE_USERNAME = 'EJtucT1f8w';
-const STORAGE_KEY = 'leetcode_activity_v3';
+const STORAGE_KEY = 'leetcode_activity_v4';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 min
+
+/** Fetch with AbortController timeout to avoid hanging on slow/cold-start APIs */
+async function fetchWithTimeout(url, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(id);
+    return res;
+  } catch (e) {
+    clearTimeout(id);
+    throw e;
+  }
+}
 
 let inFlightPromise = null;
 
@@ -80,9 +94,9 @@ function buildWeeks(days) {
 }
 
 function computeStats(days, apiStreak = null, apiMaxStreak = null, apiActiveDays = null) {
-  let totalActive = 0, maxStreak = 0, cur = 0, currentStreak = 0;
+  let totalActive = 0, computedMax = 0, cur = 0, currentStreak = 0;
   for (const d of days) {
-    if (d.count > 0) { totalActive++; cur++; maxStreak = Math.max(maxStreak, cur); }
+    if (d.count > 0) { totalActive++; cur++; computedMax = Math.max(computedMax, cur); }
     else cur = 0;
   }
   for (let i = days.length - 1; i >= 0; i--) {
@@ -90,11 +104,13 @@ function computeStats(days, apiStreak = null, apiMaxStreak = null, apiActiveDays
     else break;
   }
   const totalSubmissions = days.reduce((s, d) => s + d.count, 0);
-  // Prefer API-provided values when available (more accurate)
+  // Always compute maxStreak from calendar; use API value only if larger
+  const apiMax = apiMaxStreak != null ? Number(apiMaxStreak) : 0;
+  const maxStreak = Math.max(computedMax, apiMax);
   return {
-    totalActive:    apiActiveDays  != null ? apiActiveDays  : totalActive,
-    maxStreak:      apiMaxStreak   != null ? apiMaxStreak   : maxStreak,
-    currentStreak:  apiStreak      != null ? apiStreak      : currentStreak,
+    totalActive:    apiActiveDays  != null ? Number(apiActiveDays)  : totalActive,
+    maxStreak,
+    currentStreak:  apiStreak      != null ? Number(apiStreak)      : currentStreak,
     totalSubmissions,
   };
 }
@@ -107,64 +123,64 @@ export async function fetchLeetcodeActivity(force = false) {
   if (inFlightPromise) return inFlightPromise;
 
   inFlightPromise = (async () => {
-    // Try alfa-leetcode-api (has submissionCalendar)
-    try {
-      const res = await fetch(
-        `https://alfa-leetcode-api.onrender.com/userProfile/${LEETCODE_USERNAME}`
-      );
-      if (res.ok) {
+    /** Helper: try one endpoint and return parsed data or null */
+    async function tryEndpoint(url, calKey = 'submissionCalendar', timeoutMs = 15000) {
+      try {
+        const res = await fetchWithTimeout(url, timeoutMs);
+        if (!res.ok) return null;
         const json = await res.json();
-        const cal = json?.submissionCalendar;
-        if (cal) {
-          const days = parseCalendar(cal);
-          const weeks = buildWeeks(days);
-          // alfa-leetcode-api returns streak, totalActiveDays, maxStreak at top level
-          const apiStreak      = json?.streak       != null ? Number(json.streak)       : null;
-          const apiMaxStreak   = json?.maxStreak     != null ? Number(json.maxStreak)    : null;
-          const apiActiveDays  = json?.totalActiveDays != null ? Number(json.totalActiveDays) : null;
-          const stats = computeStats(days, apiStreak, apiMaxStreak, apiActiveDays);
-          const data = {
-            weeks,
-            ...stats,
-            totalSolved: json.totalSolved ?? json.solvedProblem ?? null,
-            lastUpdated: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-          };
-          saveToCache(data);
-          window.dispatchEvent(new CustomEvent('portfolio:leetcodeActivityUpdated', { detail: data }));
-          return data;
-        }
+        const cal = json?.[calKey];
+        if (!cal) return null;
+        const days = parseCalendar(cal);
+        if (!days.length) return null;
+        const weeks = buildWeeks(days);
+        const apiStreak     = json?.streak          != null ? Number(json.streak)          : null;
+        const apiMaxStreak  = json?.maxStreak        != null ? Number(json.maxStreak)       : null;
+        const apiActiveDays = json?.totalActiveDays  != null ? Number(json.totalActiveDays) : null;
+        const stats = computeStats(days, apiStreak, apiMaxStreak, apiActiveDays);
+        return {
+          weeks,
+          ...stats,
+          totalSolved: json.totalSolved ?? json.solvedProblem ?? null,
+          lastUpdated: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        };
+      } catch (e) {
+        return null;
       }
-    } catch (e) {}
+    }
 
-    // Try leetcode-stats-api
-    try {
-      const res = await fetch(
-        `https://leetcode-stats-api.herokuapp.com/${LEETCODE_USERNAME}`
+    // 1. Primary: alfa-leetcode-api /userProfile path (has submissionCalendar)
+    let data = await tryEndpoint(
+      `https://alfa-leetcode-api.onrender.com/userProfile/${LEETCODE_USERNAME}`,
+      'submissionCalendar',
+      15000
+    );
+
+    // 2. Fallback: alfa-leetcode-api root path (different shape)
+    if (!data) {
+      data = await tryEndpoint(
+        `https://alfa-leetcode-api.onrender.com/${LEETCODE_USERNAME}`,
+        'submissionCalendar',
+        12000
       );
-      if (res.ok) {
-        const json = await res.json();
-        const cal = json?.submissionCalendar;
-        if (cal) {
-          const days = parseCalendar(cal);
-          const weeks = buildWeeks(days);
-          const apiStreak     = json?.streak       != null ? Number(json.streak)       : null;
-          const apiMaxStreak  = json?.maxStreak     != null ? Number(json.maxStreak)    : null;
-          const apiActiveDays = json?.totalActiveDays != null ? Number(json.totalActiveDays) : null;
-          const stats = computeStats(days, apiStreak, apiMaxStreak, apiActiveDays);
-          const data = {
-            weeks,
-            ...stats,
-            totalSolved: json.totalSolved ?? null,
-            lastUpdated: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-          };
-          saveToCache(data);
-          window.dispatchEvent(new CustomEvent('portfolio:leetcodeActivityUpdated', { detail: data }));
-          return data;
-        }
-      }
-    } catch (e) {}
+    }
 
-    // Return stale cache
+    // 3. Fallback: leetcode-api-foss
+    if (!data) {
+      data = await tryEndpoint(
+        `https://leetcode-api-foss.onrender.com/api/user/${LEETCODE_USERNAME}`,
+        'submissionCalendar',
+        12000
+      );
+    }
+
+    if (data) {
+      saveToCache(data);
+      window.dispatchEvent(new CustomEvent('portfolio:leetcodeActivityUpdated', { detail: data }));
+      return data;
+    }
+
+    // All endpoints failed — return stale cache if available
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) return JSON.parse(raw).data;
@@ -189,10 +205,15 @@ export function useLeetcodeActivity() {
   useEffect(() => {
     let mounted = true;
     function onUpdate(e) {
-      if (mounted && e.detail) setData(e.detail);
+      if (mounted && e.detail) { setData(e.detail); setLoading(false); }
     }
     window.addEventListener('portfolio:leetcodeActivityUpdated', onUpdate);
-    fetchLeetcodeActivity().then((d) => { if (mounted && d) setData(d); });
+    // Show loading spinner only when no cache is available yet
+    if (!getFromCache()) setLoading(true);
+    fetchLeetcodeActivity().then((d) => {
+      if (mounted && d) setData(d);
+      if (mounted) setLoading(false);
+    });
     return () => {
       mounted = false;
       window.removeEventListener('portfolio:leetcodeActivityUpdated', onUpdate);

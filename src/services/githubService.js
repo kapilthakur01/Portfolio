@@ -5,8 +5,22 @@
 import { useState, useEffect } from 'react';
 
 const GITHUB_USERNAME = 'kapilthakur01';
-const STORAGE_KEY = 'github_activity_v3';
+const STORAGE_KEY = 'github_activity_v4';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 min
+
+/** Fetch with AbortController timeout to avoid hanging on slow/cold-start APIs */
+async function fetchWithTimeout(url, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(id);
+    return res;
+  } catch (e) {
+    clearTimeout(id);
+    throw e;
+  }
+}
 
 let inFlightPromise = null;
 
@@ -75,32 +89,51 @@ export async function fetchGithubActivity(force = false) {
   if (inFlightPromise) return inFlightPromise;
 
   inFlightPromise = (async () => {
-    // Primary: jogruber contributions API (CORS-friendly)
-    try {
-      const res = await fetch(
-        `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
-      );
-      if (res.ok) {
+    /** Helper: try one jogruber endpoint with timeout */
+    async function tryJogruber(yearParam, timeoutMs = 15000) {
+      try {
+        const res = await fetchWithTimeout(
+          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=${yearParam}`,
+          timeoutMs
+        );
+        if (!res.ok) return null;
         const json = await res.json();
         const rawDays = json.contributions || [];
-        const total = json.total?.lastYear ?? rawDays.reduce((s, d) => s + d.count, 0);
+        if (!rawDays.length) return null;
+        const total = json.total?.lastYear ?? json.total?.[yearParam] ?? rawDays.reduce((s, d) => s + d.count, 0);
         const weeks = buildWeeks(rawDays);
         const stats = computeStats(rawDays);
-        const data = { contributions: total, weeks, ...stats,
-          lastUpdated: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) };
-        saveToCache(data);
-        window.dispatchEvent(new CustomEvent('portfolio:githubUpdated', { detail: data }));
-        return data;
+        return {
+          contributions: total,
+          weeks,
+          ...stats,
+          lastUpdated: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        };
+      } catch (e) {
+        return null;
       }
-    } catch (e) {}
+    }
 
-    // Fallback: ghchart svg scrape proxy
-    try {
-      const res = await fetch(`https://ghchart.rshah.org/kapilthakur01`, { mode: 'no-cors' });
-      // no-cors means we can't read it, skip
-    } catch (e) {}
+    // 1. Primary: ?y=last (covers the rolling last year)
+    let data = await tryJogruber('last', 15000);
 
-    // Return stale cache if any
+    // 2. Fallback: try current year explicitly
+    if (!data) {
+      data = await tryJogruber(new Date().getFullYear(), 12000);
+    }
+
+    // 3. Fallback: try previous year
+    if (!data) {
+      data = await tryJogruber(new Date().getFullYear() - 1, 12000);
+    }
+
+    if (data) {
+      saveToCache(data);
+      window.dispatchEvent(new CustomEvent('portfolio:githubUpdated', { detail: data }));
+      return data;
+    }
+
+    // All failed — return stale cache if any
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) return JSON.parse(raw).data;
@@ -125,10 +158,15 @@ export function useGithubActivity() {
   useEffect(() => {
     let mounted = true;
     function onUpdate(e) {
-      if (mounted && e.detail) setData(e.detail);
+      if (mounted && e.detail) { setData(e.detail); setLoading(false); }
     }
     window.addEventListener('portfolio:githubUpdated', onUpdate);
-    fetchGithubActivity().then((d) => { if (mounted && d) setData(d); });
+    // Show loading spinner only when no cache is available yet
+    if (!getFromCache()) setLoading(true);
+    fetchGithubActivity().then((d) => {
+      if (mounted && d) setData(d);
+      if (mounted) setLoading(false);
+    });
     return () => { mounted = false; window.removeEventListener('portfolio:githubUpdated', onUpdate); };
   }, []);
 

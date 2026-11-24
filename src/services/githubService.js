@@ -111,8 +111,16 @@ export async function fetchGithubActivity(force = false) {
   return inFlightPromise;
 }
 
+/** Force-refresh: clears cache and re-fetches from network */
+export async function refreshGithubActivity() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  inFlightPromise = null;
+  return fetchGithubActivity(true);
+}
+
 export function useGithubActivity() {
   const [data, setData] = useState(() => getFromCache());
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -124,5 +132,15 @@ export function useGithubActivity() {
     return () => { mounted = false; window.removeEventListener('portfolio:githubUpdated', onUpdate); };
   }, []);
 
-  return data;
+  async function refresh() {
+    setLoading(true);
+    try {
+      const d = await refreshGithubActivity();
+      if (d) setData(d);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return { data, loading, refresh };
 }

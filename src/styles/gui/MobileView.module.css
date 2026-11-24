@@ -102,6 +102,9 @@
   cursor: pointer;
   transition: background 120ms;
   min-height: 44px;
+  position: sticky;
+  bottom: 20px;
+  margin-top: auto;
 }
 .cliBtn:hover { background: rgba(78,204,163,0.2); }
 
@@ -148,7 +151,14 @@
   min-height: 44px;
 }
 
-.sheetBody { flex: 1; overflow: hidden; }
+.sheetBody {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+}
 
 .loading {
   display: flex;
@@ -162,5 +172,14 @@
 
 @media (max-width: 360px) {
   .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 320px) {
+  .home { padding: 32px 16px 80px; }
+}
+
+@media (max-width: 375px) {
+  .name { font-size: 22px; }
+  .sub { font-size: 12px; }
 }
 

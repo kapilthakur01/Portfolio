@@ -1,18 +1,20 @@
 /**
  * GithubActivityWidget.jsx
- * Redesigned GitHub-style contribution card — matches LeetCode widget design.
- * Data from useGithubActivity() — no hardcoding.
+ * Compact GitHub-style contribution card with refresh button.
+ * Smaller cells, clean layout, real data only.
  */
 import React, { useMemo, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, RefreshCw } from 'lucide-react';
 import { useGithubActivity } from '../../services/githubService.js';
 
+/* ─── Green palette ─── */
 const GREENS = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
-const CELL   = 10;
-const GAP    = 2;
-const PITCH  = CELL + GAP;
 
-const DAY_ROW_LABELS = ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
+const CELL  = 9;            // px — compact
+const GAP   = 2;            // px
+const PITCH = CELL + GAP;   // 11px per slot
+
+const DAY_LABELS = ['Sun', '', 'Tue', '', 'Thu', '', 'Sat'];
 
 function buildMonthLabels(weeks) {
   const labels = [];
@@ -37,10 +39,10 @@ function relativeTime(dateStr) {
   if (!dateStr) return '';
   const diff = Math.round((Date.now() - new Date(dateStr).getTime()) / 60000);
   if (diff < 2)    return 'just now';
-  if (diff < 60)   return `${diff} minutes ago`;
-  if (diff < 120)  return '1 hour ago';
-  if (diff < 1440) return `${Math.round(diff / 60)} hours ago`;
-  return `${Math.round(diff / 1440)} day${Math.round(diff / 1440) > 1 ? 's' : ''} ago`;
+  if (diff < 60)   return `${diff}m ago`;
+  if (diff < 120)  return '1h ago';
+  if (diff < 1440) return `${Math.round(diff / 60)}h ago`;
+  return `${Math.round(diff / 1440)}d ago`;
 }
 
 function Tooltip({ text, children }) {
@@ -52,17 +54,17 @@ function Tooltip({ text, children }) {
       onMouseLeave={() => setShow(false)}
     >
       {children}
-      {show && (
+      {show && text && (
         <div style={{
           position: 'absolute',
-          bottom: CELL + 6,
+          bottom: CELL + 5,
           left: '50%',
           transform: 'translateX(-50%)',
           background: '#0d1117',
           color: '#e6edf3',
           fontSize: 10,
           padding: '3px 7px',
-          borderRadius: 5,
+          borderRadius: 4,
           whiteSpace: 'nowrap',
           pointerEvents: 'none',
           border: '1px solid rgba(255,255,255,0.15)',
@@ -86,8 +88,8 @@ function Heatmap({ weeks, maxWeeks = 53 }) {
 
   if (!display.length) {
     return (
-      <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11, padding: '16px 0', textAlign: 'center' }}>
-        Loading activity…
+      <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: 10, padding: '12px 0', textAlign: 'center' }}>
+        Loading…
       </div>
     );
   }
@@ -97,15 +99,15 @@ function Heatmap({ weeks, maxWeeks = 53 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       {/* Month labels */}
-      <div style={{ display: 'flex', marginLeft: 26 }}>
-        <div style={{ position: 'relative', width: numWeeks * PITCH - GAP, height: 14 }}>
+      <div style={{ display: 'flex', marginLeft: 24 }}>
+        <div style={{ position: 'relative', width: numWeeks * PITCH - GAP, height: 13 }}>
           {monthLabels.map(({ wi, label }) => (
             <span key={wi} style={{
               position: 'absolute',
               left: wi * PITCH,
-              fontSize: 10,
+              fontSize: 9,
               color: '#8b949e',
-              lineHeight: '14px',
+              lineHeight: '13px',
               whiteSpace: 'nowrap',
               userSelect: 'none',
             }}>
@@ -115,18 +117,18 @@ function Heatmap({ weeks, maxWeeks = 53 }) {
         </div>
       </div>
 
-      {/* Grid body */}
-      <div style={{ display: 'flex', gap: 4 }}>
+      {/* Grid */}
+      <div style={{ display: 'flex', gap: 3 }}>
         {/* Day labels */}
-        <div style={{ display: 'flex', flexDirection: 'column', width: 22, flexShrink: 0 }}>
-          {DAY_ROW_LABELS.map((lbl, i) => (
+        <div style={{ display: 'flex', flexDirection: 'column', width: 21, flexShrink: 0 }}>
+          {DAY_LABELS.map((lbl, i) => (
             <div key={i} style={{
               height: PITCH,
-              fontSize: 9,
+              fontSize: 8,
               color: '#8b949e',
               lineHeight: `${PITCH}px`,
               textAlign: 'right',
-              paddingRight: 4,
+              paddingRight: 3,
               userSelect: 'none',
             }}>
               {lbl}
@@ -158,7 +160,11 @@ function Heatmap({ weeks, maxWeeks = 53 }) {
                     borderRadius: 2,
                     background: GREENS[level],
                     cursor: day && day.count > 0 ? 'pointer' : 'default',
-                  }} />
+                    transition: 'opacity 0.1s',
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.opacity = '0.75'; }}
+                    onMouseLeave={e => { e.currentTarget.style.opacity = '1'; }}
+                  />
                 </Tooltip>
               );
             })
@@ -167,18 +173,12 @@ function Heatmap({ weeks, maxWeeks = 53 }) {
       </div>
 
       {/* Legend */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        gap: 4,
-        marginTop: 2,
-      }}>
-        <span style={{ fontSize: 9, color: '#8b949e', userSelect: 'none' }}>Less</span>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 3, marginTop: 1 }}>
+        <span style={{ fontSize: 8, color: '#8b949e', userSelect: 'none' }}>Less</span>
         {GREENS.map((c, i) => (
           <div key={i} style={{ width: CELL, height: CELL, borderRadius: 2, background: c, flexShrink: 0 }} />
         ))}
-        <span style={{ fontSize: 9, color: '#8b949e', userSelect: 'none' }}>More</span>
+        <span style={{ fontSize: 8, color: '#8b949e', userSelect: 'none' }}>More</span>
       </div>
     </div>
   );
@@ -186,18 +186,19 @@ function Heatmap({ weeks, maxWeeks = 53 }) {
 
 function Stat({ value, label }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3 }}>
-      <span style={{ fontSize: 20, fontWeight: 700, color: '#ffffff', lineHeight: 1 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+      <span style={{ fontSize: 16, fontWeight: 700, color: '#fff', lineHeight: 1 }}>
         {value ?? '—'}
       </span>
       <span style={{
-        fontSize: 9,
+        fontSize: 8,
         color: '#8b949e',
         textTransform: 'uppercase',
         letterSpacing: '0.06em',
         textAlign: 'center',
         lineHeight: 1.3,
         userSelect: 'none',
+        whiteSpace: 'pre-line',
       }}>
         {label}
       </span>
@@ -206,64 +207,78 @@ function Stat({ value, label }) {
 }
 
 export default function GithubActivityWidget() {
-  const data = useGithubActivity();
-  const updatedText = data?.lastUpdated ? `Updated ${relativeTime(data.lastUpdated)}` : '';
+  const { data, loading, refresh } = useGithubActivity();
+  const updatedText = data?.lastUpdated ? relativeTime(data.lastUpdated) : '';
 
   return (
     <div style={{
       width: '100%',
       height: '100%',
-      background: 'rgba(13,17,23,0.72)',
+      background: 'rgba(13,17,23,0.75)',
       backdropFilter: 'blur(28px) saturate(180%)',
       WebkitBackdropFilter: 'blur(28px) saturate(180%)',
       border: '1px solid rgba(255,255,255,0.1)',
       borderTop: '1px solid rgba(255,255,255,0.18)',
-      borderRadius: 16,
+      borderRadius: 14,
       boxSizing: 'border-box',
-      padding: '14px 18px 12px',
+      padding: '10px 14px 9px',
       display: 'flex',
       flexDirection: 'column',
-      gap: 10,
+      gap: 7,
       overflow: 'hidden',
-      boxShadow: '0 16px 40px rgba(0,0,0,0.5)',
+      boxShadow: '0 12px 32px rgba(0,0,0,0.5)',
     }}>
 
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{
-            fontSize: 11,
-            fontWeight: 700,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#e6edf3',
-          }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#e6edf3' }}>
             GitHub Activity
           </span>
           {updatedText && (
-            <span style={{ fontSize: 9, color: '#8b949e', fontFamily: 'monospace' }}>
+            <span style={{ fontSize: 8, color: '#8b949e', fontFamily: 'monospace' }}>
               {updatedText}
             </span>
           )}
         </div>
-        <a
-          href="https://github.com/kapilthakur01"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 3,
-            fontSize: 10,
-            color: '#8b949e',
-            textDecoration: 'none',
-            transition: 'color 0.15s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = '#e6edf3'}
-          onMouseLeave={e => e.currentTarget.style.color = '#8b949e'}
-        >
-          View profile <ExternalLink size={9} />
-        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {/* Refresh button */}
+          <button
+            onClick={refresh}
+            disabled={loading}
+            title="Refresh GitHub activity"
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: loading ? 'default' : 'pointer',
+              padding: 2,
+              display: 'flex',
+              alignItems: 'center',
+              color: '#8b949e',
+              transition: 'color 0.15s',
+              opacity: loading ? 0.5 : 1,
+            }}
+            onMouseEnter={e => { if (!loading) e.currentTarget.style.color = '#e6edf3'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#8b949e'; }}
+          >
+            <RefreshCw
+              size={10}
+              style={{
+                animation: loading ? 'spin 0.8s linear infinite' : 'none',
+              }}
+            />
+          </button>
+          <a
+            href="https://github.com/kapilthakur01"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: 9, color: '#8b949e', textDecoration: 'none' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#e6edf3'}
+            onMouseLeave={e => e.currentTarget.style.color = '#8b949e'}
+          >
+            View profile <ExternalLink size={8} />
+          </a>
+        </div>
       </div>
 
       {/* Stats */}
@@ -273,20 +288,20 @@ export default function GithubActivityWidget() {
         justifyContent: 'space-between',
         flexShrink: 0,
         borderBottom: '1px solid rgba(255,255,255,0.07)',
-        paddingBottom: 10,
+        paddingBottom: 7,
       }}>
         <div>
-          <div style={{ fontSize: 28, fontWeight: 700, color: '#fff', lineHeight: 1 }}>
+          <div style={{ fontSize: 22, fontWeight: 700, color: '#fff', lineHeight: 1 }}>
             {data?.contributions ?? '—'}
           </div>
-          <div style={{ fontSize: 9, color: '#8b949e', marginTop: 3 }}>
+          <div style={{ fontSize: 8, color: '#8b949e', marginTop: 2 }}>
             contributions in the past year
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 20, alignItems: 'flex-end' }}>
-          <Stat value={data?.totalActive}    label={'Total Active\nDays'} />
-          <Stat value={data?.maxStreak}      label={'Max\nStreak'} />
-          <Stat value={data?.currentStreak}  label={'Current\nStreak'} />
+        <div style={{ display: 'flex', gap: 16, alignItems: 'flex-end' }}>
+          <Stat value={data?.totalActive}   label={'Total Active\nDays'} />
+          <Stat value={data?.maxStreak}     label={'Max\nStreak'} />
+          <Stat value={data?.currentStreak} label={'Current\nStreak'} />
         </div>
       </div>
 
@@ -294,6 +309,9 @@ export default function GithubActivityWidget() {
       <div style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
         <Heatmap weeks={data?.weeks ?? []} maxWeeks={53} />
       </div>
+
+      {/* Spin keyframe injected once */}
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }

@@ -120,3 +120,19 @@
     gap: 12px;
   }
 }
+
+@media (max-width: 400px) {
+  .categoryCard { padding: 12px 14px; border-radius: 14px; }
+  .categoryTitle { font-size: 15px; }
+  .countBadge { font-size: 9px; padding: 2px 8px; }
+  .skillPill { padding: 5px 10px 5px 8px; gap: 6px; }
+  .skillLabel { font-size: 11px; }
+  .skillIconWrapper { width: 16px; height: 16px; }
+}
+
+@media (max-width: 400px) {
+  .categoryCard { padding: 12px 14px; }
+  .categoryTitle { font-size: 15px; }
+  .skillPill { padding: 5px 10px 5px 8px; }
+  .skillLabel { font-size: 11.5px; }
+}

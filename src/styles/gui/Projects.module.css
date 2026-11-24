@@ -381,3 +381,50 @@
   border-color: rgba(45, 212, 191, 0.55);
   color: #5eead4;
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .cardName { font-size: 15px; }
+  .cardSub { font-size: 12px; margin-bottom: 10px; }
+  .card { padding: 14px; }
+  .detailTitle { font-size: clamp(18px, 5vw, 24px); }
+  .actionsRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .actionBtn {
+    width: 100%;
+    justify-content: center;
+  }
+  .metaRow { flex-wrap: wrap; gap: 6px; font-size: 12px; }
+  .pillsRow { gap: 6px 8px; }
+}
+
+@media (max-width: 400px) {
+  .card { padding: 12px; }
+  .cardName { font-size: 14px; }
+  .detailContainer { gap: 16px; }
+  .highlightsCard { padding: 12px 14px; }
+  .highlightItem { font-size: 13px; gap: 8px; }
+  .stackPill { padding: 5px 10px; font-size: 12px; }
+  .cardTagPill { font-size: 10px; padding: 2px 6px; }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .cardName { font-size: 15px; }
+  .cardSub { font-size: 12px; }
+  .detailTitle { font-size: clamp(18px, 5vw, 24px); }
+  .actionsRow { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+@media (max-width: 400px) {
+  .card { padding: 14px; }
+  .detailContainer { gap: 16px; }
+  .highlightsCard { padding: 14px 16px; }
+}

@@ -16,8 +16,8 @@ export const WIDGET_DIMENSIONS = {
   calendar:         { width: 170, height: 170 },
   dsaFocus:         { width: 163, height: 118 },
   status:           { width: 163, height: 118 },
-  githubActivity:   { width: 460, height: 230 },
-  leetcodeActivity: { width: 460, height: 265 },
+  githubActivity:   { width: 420, height: 200 },
+  leetcodeActivity: { width: 420, height: 215 },
   spotlight:        { width: 540, height: 50  },
 };
 

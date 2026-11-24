@@ -14,7 +14,7 @@ import {
 } from './widgetLayout.js';
 import styles from '../../styles/gui/Widgets.module.css';
 
-const STORAGE_KEY = 'gui_widgets_positions_v8';
+const STORAGE_KEY = 'gui_widgets_positions_v9';
 
 export default function WidgetsLayer({ switchMode }) {
   // Initialize positions from localStorage or compute clean default layout

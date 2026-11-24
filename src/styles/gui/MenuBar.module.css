@@ -144,3 +144,10 @@
   .date  { display: none; }
 }
 
+@media (max-width: 480px) {
+  .menuBar { padding: 0 var(--sp-3); font-size: 12px; }
+  .appName  { font-size: 12px; }
+  .clock    { font-size: 12px; }
+  .switchBtn { font-size: 11px; padding: 2px 8px; }
+}
+

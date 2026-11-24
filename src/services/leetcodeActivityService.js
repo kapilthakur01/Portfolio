@@ -175,8 +175,16 @@ export async function fetchLeetcodeActivity(force = false) {
   return inFlightPromise;
 }
 
+/** Force-refresh: clears cache and re-fetches from network */
+export async function refreshLeetcodeActivity() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  inFlightPromise = null;
+  return fetchLeetcodeActivity(true);
+}
+
 export function useLeetcodeActivity() {
   const [data, setData] = useState(() => getFromCache());
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -191,5 +199,15 @@ export function useLeetcodeActivity() {
     };
   }, []);
 
-  return data;
+  async function refresh() {
+    setLoading(true);
+    try {
+      const d = await refreshLeetcodeActivity();
+      if (d) setData(d);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return { data, loading, refresh };
 }

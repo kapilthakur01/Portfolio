@@ -114,6 +114,25 @@
   }
 }
 
+@media (max-width: 480px) {
+  .viewerContainer { padding: 6px 4px 8px; }
+  .toolbar {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: auto;
+  }
+  .actions { gap: 6px; }
+  .label { font-size: 12px; }
+  .subLabel { font-size: 10px; }
+  .scrollArea { padding: 12px 8px 32px; }
+}
+
+@media (max-width: 360px) {
+  .viewerContainer { padding: 4px 0 6px; }
+  .toolbar { padding: 6px 10px; }
+}
+
 /*
  * Scrollable viewport for the document.
  * min-height: 0 ensures flex child allows vertical scrolling.
@@ -168,4 +187,10 @@
     0 2px 10px rgba(0, 0, 0, 0.4);
   background: #ffffff;
   display: block;
+}
+
+@media (max-width: 480px) {
+  .viewerContainer { padding: 6px 4px 8px; }
+  .toolbar { padding: 8px 12px; flex-wrap: wrap; gap: 8px; }
+  .actions { gap: 6px; }
 }

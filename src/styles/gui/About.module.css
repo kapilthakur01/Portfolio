@@ -55,3 +55,18 @@
   .location { justify-content: center; }
 }
 
+@media (max-width: 375px) {
+  .photo { width: 72px; height: 72px; }
+  .name { font-size: 17px; }
+  .role { font-size: 11px; }
+  .tagline { font-size: 12px; }
+  .location { font-size: 11px; }
+}
+
+
+@media (max-width: 375px) {
+  .photo { width: 72px; height: 72px; }
+  .name { font-size: 17px; }
+  .role { font-size: 11px; }
+  .tagline { font-size: 12px; }
+}

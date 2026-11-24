@@ -7,6 +7,10 @@
   color: var(--gui-text-primary);
   scrollbar-width: thin;
   scrollbar-color: var(--gui-border-bright) transparent;
+  /* Smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent flex children from overflowing */
+  box-sizing: border-box;
 }
 .panel::-webkit-scrollbar { width: 5px; }
 .panel::-webkit-scrollbar-thumb { background: var(--gui-border-bright); border-radius: 3px; }
@@ -62,5 +66,23 @@
   background: rgba(78,204,163,0.25);
   border-color: var(--gui-accent);
   text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .panel { padding: 16px; }
+}
+
+@media (max-width: 400px) {
+  .panel { padding: 12px 14px; }
+  .sectionTitle { font-size: 12px; }
+  .text { font-size: 13px; }
+}
+
+@media (max-width: 767px) {
+  .panel { padding: 16px; }
+}
+
+@media (max-width: 480px) {
+  .panel { padding: 14px; }
 }
 

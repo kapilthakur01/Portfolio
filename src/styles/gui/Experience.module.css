@@ -210,4 +210,39 @@
     flex-direction: column;
     gap: 12px;
   }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .achieveCard { padding: 14px 16px; }
+  .eduTitle { font-size: 15px; }
+  .eduDegree { font-size: 13px; }
+  .achieveTitle { font-size: 13px; }
+  .eduTopRow { align-items: flex-start; }
+}
+
+@media (max-width: 400px) {
+  .container { gap: 18px; padding: 2px 0 12px; }
+  .achieveCard { padding: 12px 14px; gap: 8px; }
+  .eduCard { padding: 14px 16px; }
+  .achieveBadge { font-size: 10px; padding: 2px 7px; }
+  .eduTopRow { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .achieveTitle { font-size: 12px; }
+  .achieveDetail { font-size: 12px; }
+  .eduTitle { font-size: 14px; }
+  .achieveTag { font-size: 9px; }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .achieveCard { padding: 14px 16px; }
+  .eduTitle { font-size: 15px; }
+  .eduDegree { font-size: 13px; }
+  .achieveTitle { font-size: 13px; }
+}
+@media (max-width: 400px) {
+  .container { gap: 18px; }
+  .achieveBadge { font-size: 10px; padding: 2px 7px; }
+  .eduTopRow { flex-direction: column; align-items: flex-start; }
 }
